@@ -20,3 +20,30 @@ conda env create -f GRIP-seq.yml
 # activate conda evironment - GRIP-seq
 conda activate GRIP-seq
 ```
+## Pipeline
+
+### Usage
+
+To use our GRIP-seq pipeline, run `GRIP-seq.sh` with presets below.
+
+```
+###################
+##GRIP-seq manual##
+###################
+Version: v1.0.0
+Code: https://github.com/Shall-We-Dance/GRIP-seq
+
+Usage:  bash GRIP-seq.sh [options]
+
+The options include:
+  --help  Print this help menu.
+  --dir The root dir of our analysis
+```
+
+### Steps
+
+1. Remove PCR deduplication
+
+```
+
+```
