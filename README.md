@@ -81,7 +81,7 @@ fastp -i <ANALYSIS_DIR>/raw_data/<READS_NAME>.fastq.gz -o <ANALYSIS_DIR>/fastp/<
 
 ```
 
-
+4.  Mapping reads using [STAR](https://github.com/alexdobin/STAR).
 
 
 
