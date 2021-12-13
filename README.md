@@ -28,6 +28,8 @@ conda activate GRIP-seq
 
 2.  Make a `<GENOME_DIR>` for [STAR](https://github.com/alexdobin/STAR), which is a important tool used in our analysis. 
 
+  The structure should be like:
+
 3.  To use our GRIP-seq pipeline, run `GRIP-seq.sh` with presets below.
 
 <ANALYSIS_DIR>
@@ -58,14 +60,14 @@ The options include:
 
 1.  Make dir for GRIP-seq pipeline.
   
-  ```
-  mkdir -p ${ROOTDIR}/fastp
-mkdir -p ${ROOTDIR}/cutadapt
-mkdir -p ${ROOTDIR}/STAR/fastp_dedup_cutadapt/R2
-mkdir -p ${ROOTDIR}/bigWig/fastp_dedup_cutadapt
-mkdir -p ${ROOTDIR}/macs2/fastp_dedup_cutadapt/R2
-mkdir -p ${ROOTDIR}/R2/fastp_dedup_cutadapt
-  ```
+```
+mkdir -p <ANALYSIS_DIR>/fastp/<ANALYSISI_ID>
+mkdir -p <ANALYSIS_DIR>/cutadapt/<ANALYSISI_ID>
+mkdir -p <ANALYSIS_DIR>/STAR/<ANALYSISI_ID>
+mkdir -p <ANALYSIS_DIR>/bigWig/<ANALYSISI_ID>
+mkdir -p <ANALYSIS_DIR>/macs2/<ANALYSISI_ID>
+mkdir -p <ANALYSIS_DIR>/output/<ANALYSISI_ID>
+```
   
 2.  Remove PCR deduplication using [fastp](https://github.com/OpenGene/fastp).
 
@@ -73,4 +75,24 @@ mkdir -p ${ROOTDIR}/R2/fastp_dedup_cutadapt
 fastp -i <ANALYSIS_DIR>/raw_data/<READS_NAME>.fastq.gz -o <ANALYSIS_DIR>/fastp/<READS_NAME>_fastp_dedup.fastq.gz --dedup --length_required <LENGTH> --disable_adapter_trimming -Q -h <ANALYSIS_DIR>/fastp/<READS_NAME>_fastp_dedup.html -j <ANALYSIS_DIR>/fastp/<READS_NAME>_fastp_dedup.json
 ```
 
-3.  
+3.  Cut adapter using [cutadapt](https://github.com/marcelm/cutadapt).
+
+```
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
