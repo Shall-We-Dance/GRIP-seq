@@ -24,9 +24,9 @@ conda activate GRIP-seq
 
 ### Usage
 
-1.  Make a `<ANALYSIS_DIR>` for this analysis, put your raw data at `<ANALYSIS_DIR>/raw_data` folder. 
+1.  Make a directory `<ANALYSIS_DIR>` for this analysis, put your raw data at `<ANALYSIS_DIR>/raw_data` folder. 
 
-2.  Make a `<GENOME_DIR>` for [STAR](https://github.com/alexdobin/STAR), which is a important tool used in our analysis. 
+2.  Make a directory `<GENOME_DIR>` for [STAR](https://github.com/alexdobin/STAR), which is a important tool used in our analysis. 
 
   The structure should be like:
 
@@ -58,7 +58,7 @@ The options include:
 
 ### Steps
 
-1.  Make dir for GRIP-seq pipeline.
+1.  Make directory for GRIP-seq pipeline.
   
 ```
 mkdir -p <ANALYSIS_DIR>/fastp/<ANALYSISI_ID>
