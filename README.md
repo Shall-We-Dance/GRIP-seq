@@ -81,18 +81,33 @@ fastp -i <ANALYSIS_DIR>/raw_data/<READS_NAME>.fastq.gz -o <ANALYSIS_DIR>/fastp/<
 
 ```
 
-4.  Mapping reads using [STAR](https://github.com/alexdobin/STAR).
+4.  Map reads using [STAR](https://github.com/alexdobin/STAR).
 
+```
 
+```
 
+5.  Index the mapping output `.bam` file using [samtools](https://www.htslib.org).
 
+```
 
+```
 
+6.  Generate `.bw` file (bigwig) for mapping output using [deepTools](https://github.com/deeptools/deepTools).
 
+```
 
+```
 
+7.  Call peaks using [MACS](https://github.com/macs3-project/MACS).
 
+```
 
+```
 
+8.  Intersect output `.bam` with RefSeq to identify mRNA reads using [bedtools](https://github.com/arq5x/bedtools2).
 
+```
+
+```
 
