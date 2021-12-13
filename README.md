@@ -56,10 +56,21 @@ The options include:
 
 ### Steps
 
-1.  Remove PCR deduplication using [fastp](https://github.com/OpenGene/fastp).
+1.  Make dir for GRIP-seq pipeline.
+  
+  ```
+  mkdir -p ${ROOTDIR}/fastp
+mkdir -p ${ROOTDIR}/cutadapt
+mkdir -p ${ROOTDIR}/STAR/fastp_dedup_cutadapt/R2
+mkdir -p ${ROOTDIR}/bigWig/fastp_dedup_cutadapt
+mkdir -p ${ROOTDIR}/macs2/fastp_dedup_cutadapt/R2
+mkdir -p ${ROOTDIR}/R2/fastp_dedup_cutadapt
+  ```
+  
+2.  Remove PCR deduplication using [fastp](https://github.com/OpenGene/fastp).
 
 ```
 fastp -i <ANALYSIS_DIR>/raw_data/<READS_NAME>.fastq.gz -o <ANALYSIS_DIR>/fastp/<READS_NAME>_fastp_dedup.fastq.gz --dedup --length_required <LENGTH> --disable_adapter_trimming -Q -h <ANALYSIS_DIR>/fastp/<READS_NAME>_fastp_dedup.html -j <ANALYSIS_DIR>/fastp/<READS_NAME>_fastp_dedup.json
 ```
 
-2.  
+3.  
