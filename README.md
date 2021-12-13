@@ -30,8 +30,13 @@ conda activate GRIP-seq
 
 3. To use our GRIP-seq pipeline, run `GRIP-seq.sh` with presets below.
 
+<ANALYSIS_DIR>
+<GENOME_DIR>
+<READS_NAME>
+<LENGTH>
+
 ```
-bash GRIP-seq.sh --dir <DIR> --
+bash GRIP-seq.sh --dir <ANALYSIS_DIR> --
 ```
 
 ```
@@ -46,13 +51,13 @@ Usage:  bash GRIP-seq.sh [options]
 
 The options include:
   --help  Print this help menu.
-  --dir The root dir <DIR> of our analysis
+  --dir The root dir <ANALYSIS_DIR> of our analysis
 ```
 
 ### Steps
 
-1. Remove PCR deduplication
+1. Remove PCR deduplication using [fastp](https://github.com/OpenGene/fastp)
 
 ```
-
+fastp -i <ANALYSIS_DIR>/raw_data/<READS_NAME>.fastq.gz -o <ANALYSIS_DIR>/fastp/<READS_NAME>_fastp_dedup.fastq.gz --dedup --length_required <LENGTH> --disable_adapter_trimming -Q -h <ANALYSIS_DIR>/fastp/<READS_NAME>_fastp_dedup.html -j <ANALYSIS_DIR>/fastp/<READS_NAME>_fastp_dedup.json
 ```
