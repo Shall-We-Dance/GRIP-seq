@@ -56,7 +56,7 @@ The options include:
   --dir The root dir <ANALYSIS_DIR> of our analysis
 ```
 
-### Steps
+### Steps in detail
 
 1.  Make directory for GRIP-seq pipeline.
   
