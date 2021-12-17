@@ -72,19 +72,36 @@ mkdir -p <ANALYSIS_DIR>/output/<ANALYSISI_ID>
 2.  Remove PCR deduplication using [fastp](https://github.com/OpenGene/fastp).
 
 ```
-fastp -i <ANALYSIS_DIR>/raw_data/<READS_NAME>.fastq.gz -o <ANALYSIS_DIR>/fastp/<READS_NAME>_fastp_dedup.fastq.gz --dedup --length_required <LENGTH> --disable_adapter_trimming -Q -h <ANALYSIS_DIR>/fastp/<READS_NAME>_fastp_dedup.html -j <ANALYSIS_DIR>/fastp/<READS_NAME>_fastp_dedup.json
+fastp -i ${ROOTDIR}/raw_data/${ID}/${NAME}_R1.fastq.gz \
+-I ${ROOTDIR}/raw_data/${ID}/${NAME}_R2.fastq.gz \
+-o ${ROOTDIR}/fastp/${ID}/${NAME}_R1_fastp_dedup_adapter.fastq.gz \
+-O ${ROOTDIR}/fastp/${ID}/${NAME}_R2_fastp_dedup_adapter.fastq.gz \
+-h ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_dedup_adapter.html \
+-j ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_dedup_adapter.json \
+--thread ${THREAD} \
+--dedup
 ```
 
 3.  Cut adapter using [cutadapt](https://github.com/marcelm/cutadapt).
 
 ```
-
+cutadapt -j ${THREAD} \
+-u 12 -u -10 \
+-o ${ROOTDIR}/cutadapt/${ID}/${NAME}_R1_cutadapt_fastp_dedup_adapter.fastq.gz ${ROOTDIR}/fastp/${ID}/${NAME}_R1_fastp_dedup_adapter.fastq.gz;
+cutadapt -j ${THREAD} \
+u 10 -u -12 \
+-o ${ROOTDIR}/cutadapt/${ID}/${NAME}_R2_cutadapt_fastp_dedup_adapter.fastq.gz ${ROOTDIR}/fastp/${ID}/${NAME}_R2_fastp_dedup_adapter.fastq.gz;
 ```
 
 4.  Map reads using [STAR](https://github.com/alexdobin/STAR).
 
 ```
-
+STAR  --runThreadN 40 \
+--genomeDir  ${GENOMEDIR_STAR} \
+--readFilesCommand zcat \
+--readFilesIn  ${ROOTDIR}/cutadapt/${ID}/${NAME}_R2_cutadapt_fastp_dedup_adapter.fastq.gz \
+--outFileNamePrefix ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bam \
+--outSAMtype BAM SortedByCoordinate ;
 ```
 
 5.  Index the mapping output `.bam` file using [samtools](https://www.htslib.org).
