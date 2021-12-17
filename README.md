@@ -69,7 +69,7 @@ mkdir -p <ANALYSIS_DIR>/macs2/<ANALYSISI_ID>
 mkdir -p <ANALYSIS_DIR>/output/<ANALYSISI_ID>
 ```
   
-2.  Remove PCR deduplication using [fastp](https://github.com/OpenGene/fastp).
+2.  Remove PCR deduplication and cut adapter using [fastp](https://github.com/OpenGene/fastp).
 
 ```
 fastp -i ${ROOTDIR}/raw_data/${ID}/${NAME}_R1.fastq.gz \
