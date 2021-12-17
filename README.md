@@ -107,13 +107,14 @@ STAR  --runThreadN 40 \
 5.  Index the mapping output `.bam` file using [samtools](https://www.htslib.org).
 
 ```
-
+samtools index -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam;
 ```
 
 6.  Generate `.bw` file (bigwig) for mapping output using [deepTools](https://github.com/deeptools/deepTools).
 
 ```
-
+bamCoverage -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam \
+-o ${ROOTDIR}/bigWig/${ID}/${NAME}.bigwig;
 ```
 
 7.  Call peaks using [MACS](https://github.com/macs3-project/MACS).
