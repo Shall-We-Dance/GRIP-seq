@@ -117,11 +117,13 @@ bamCoverage -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.ou
 -o ${ROOTDIR}/bigWig/${ID}/${NAME}.bigwig;
 ```
 
-7.  Call peaks using [MACS](https://github.com/macs3-project/MACS).
+7.  Call peaks using [Clipper](https://github.com/YeoLab/clipper).
 
 ```
 
 ```
+  
+  📒NOTE: We do not recommend useing [MACS](https://github.com/macs3-project/MACS) to call peaks, our result is quite different form the model used by MACS, I've tried that tools but the result is week.
 
 8.  Intersect output `.bam` with RefSeq to identify mRNA reads using [bedtools](https://github.com/arq5x/bedtools2).
 
