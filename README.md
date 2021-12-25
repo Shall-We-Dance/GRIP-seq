@@ -56,6 +56,27 @@ The options include:
   --dir The root dir <ANALYSIS_DIR> of our analysis
 ```
 
+  
+4.  You should have a dir like this after set up:
+  
+```
+${TOOLSDIR}/
+    meme/
+        #Using meme to find motif
+    STAR/
+        #Using STAR to map reads
+    clipper/
+        #Using clipper to call peaks
+${ANALYSIS_DIR}/
+    raw_data/
+        # Your reads files
+${GENOME_DIR}/
+    hg19/
+        #hg19 will be used to map reads by STAR
+
+```
+  
+  
 ### Steps in detail
 
 1.  Make directory for GRIP-seq pipeline.
