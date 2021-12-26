@@ -22,10 +22,11 @@ all <- read.table("all.sorted.merged.bed",header=F)
 all[,4:7]=0
 colnames(all) <- c("chr","start","end","GRIP","CIMS","CITS","m6Am")
 
-#初始化
+#Initialization
 xrow=1
-#断点续跑
+#Continue on breakpoint
 load("UpSet.Rdata")
+#This loop takes a long time, over 8 hours
 for(i in xrow:nrow(all)){
   print(i)
   f_GRIP = filter(GRIP, V1 == all[i,1])
