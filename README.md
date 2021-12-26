@@ -25,8 +25,6 @@ conda activate GRIP-seq
 ```
 ## Pipeline
 
-### Usage
-
 1.  Make directories.
 
 + Make a directory `ANALYSIS_DIR` for this analysis, put your raw data at `ANALYSIS_DIR/raw_data` folder. 
@@ -203,4 +201,8 @@ clipper -b ${ROOTDIR}/STAR/${INID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.
 ```
   
   📒NOTE: We do not recommend using [MACS](https://github.com/macs3-project/MACS) to call peaks, our result is quite different form the model used by MACS, I've tried that tools but the result is week.
+
+## Making UpSetPlot
+
+Using [UpSetR](https://github.com/hms-dbmi/UpSetR).
 
