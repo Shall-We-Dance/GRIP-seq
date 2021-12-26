@@ -199,6 +199,12 @@ clipper -b ${ROOTDIR}/STAR/${INID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.
 -o ${ROOTDIR}/clipper/${ID}/${NAME}.peak.bed \
 --FDR 0.01 --poisson-cutoff 1e-50 --minreads 5 --binomial 0.01
 ```
+
+  To find out the summits of the peaks, run:
+  ```
+  zcat ${ROOTDIR}/${NAME}.peak.bed.gz |  awk -F"\t" '{if ($6=="+") print $1"\t"$2+2"\t"$2+3"\t"$4"\t"$5"\t"$6; else print $1"\t"$3-3"\t"$3-2"\t"$4"\t"$5"\t"$6}' > ${ROOTDIR}/${NAME}.summit.bed
+  sort -k1,1 -k2,2n ${ROOTDIR}/${NAME}.summit.bed > ${ROOTDIR}/${NAME}.summit.sorted.bed
+  ```
   
   📒NOTE: We do not recommend using [MACS](https://github.com/macs3-project/MACS) to call peaks, our result is quite different form the model used by MACS, I've tried that tools but the result is week.
 
