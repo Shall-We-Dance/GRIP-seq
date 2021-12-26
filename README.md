@@ -87,10 +87,6 @@ mkdir -p ${ANALYSIS_DIR}/output/${ID}
   
   The directory structure should be like: 
   
-  
-  
-  
-  
 ```
 ${TOOLSDIR}/
     meme/
@@ -134,7 +130,6 @@ ${GENOME_DIR}/
 
 4.  GRIP-seq pipeline
 
-
 ```
 # activate conda evironment - GRIP-seq
 conda activate GRIP-seq
@@ -174,6 +169,10 @@ STAR  --runThreadN ${CPU_THREADS} \
 --outFileNamePrefix ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bam \
 --outSAMtype BAM SortedByCoordinate ;
 ```
+  If you meet the `File size limit exceeded(core dumped)` error, run command below to fix it.
+  ```
+  ulimit -n 65535
+  ```
 
 + Index the mapping output `.bam` file using [samtools](https://www.htslib.org).
 
