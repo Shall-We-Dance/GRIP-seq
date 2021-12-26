@@ -12,10 +12,13 @@ git clone https://github.com/Shall-We-Dance/GRIP-seq.git
 cd GRIP-seq
 ```
 
-2. Create conda environment using `GRIP-seq.yml` file.
+2. Create conda environment using `GRIP-seq.yml` and `clipper3.yml`.
 ```
 # create conda environment for GRIP-seq
 conda env create -f GRIP-seq.yml
+
+# create conda environment for clipper3
+conda env create -f clipper3.yml
 
 # activate conda evironment - GRIP-seq
 conda activate GRIP-seq
