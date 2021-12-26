@@ -169,7 +169,7 @@ u 10 -u -12 \
 + Map reads using [STAR](https://github.com/alexdobin/STAR).
 
 ```
-STAR  --runThreadN 40 \
+STAR  --runThreadN ${CPU_THREADS} \
 --genomeDir  ${GENOMEDIR_STAR} \
 --readFilesCommand zcat \
 --readFilesIn  ${ROOTDIR}/cutadapt/${ID}/${NAME}_R2_cutadapt_fastp_dedup_adapter.fastq.gz \
