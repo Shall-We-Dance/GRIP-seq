@@ -33,7 +33,7 @@ conda activate GRIP-seq
 
 + Make a directory `GENOME_DIR` for [STAR](https://github.com/alexdobin/STAR) to generate genome index. 
 
-+ Make a directory `TOOLS_DIR`, and install these 4 tools: [STAR](https://github.com/alexdobin/STAR), [meme](https://meme-suite.org/meme/doc/download.html), [metaPlotR](https://github.com/olarerin/metaPlotR) and [clipper](https://github.com/YeoLab/clipper). 
++ Make a directory `TOOLS_DIR`, and install these 4 tools: [STAR](https://github.com/alexdobin/STAR), [meme](https://meme-suite.org/meme/doc/download.html), [clipper](https://github.com/YeoLab/clipper), [metaPlotR](https://github.com/olarerin/metaPlotR) . 
 
   The directory structure should be like:
   
@@ -79,12 +79,12 @@ ${GENOME_DIR}/
 3.  Make directory for GRIP-seq pipeline.
   
 ```
-mkdir -p ${ANALYSIS_DIR}/fastp/${ANALYSIS_DIR}
-mkdir -p ${ANALYSIS_DIR}/cutadapt/${ANALYSIS_DIR}
-mkdir -p ${ANALYSIS_DIR}/STAR/${ANALYSIS_DIR}
-mkdir -p ${ANALYSIS_DIR}/bigWig/${ANALYSIS_DIR}
-mkdir -p ${ANALYSIS_DIR}/macs2/${ANALYSIS_DIR}
-mkdir -p ${ANALYSIS_DIR}/output/${ANALYSIS_DIR}
+mkdir -p ${ANALYSIS_DIR}/fastp/${ID}
+mkdir -p ${ANALYSIS_DIR}/cutadapt/${ID}
+mkdir -p ${ANALYSIS_DIR}/STAR/${ID}
+mkdir -p ${ANALYSIS_DIR}/bigWig/${ID}
+mkdir -p ${ANALYSIS_DIR}/clipper/${ID}
+mkdir -p ${ANALYSIS_DIR}/output/${ID}
 ```
   
   The directory structure should be like: 
@@ -101,16 +101,42 @@ ${TOOLSDIR}/
         #Using STAR to map reads
     clipper/
         #Using clipper to call peaks
+    metaPlotR/
+        #Using clipper to create metagene plots
 ${ANALYSIS_DIR}/
     raw_data/
         # Your reads files
+    fastp/
+        ${ID}/
+            #fastp is used to filter raw data
+    cutadapt/
+        ${ID}/
+            #cutadapt is used to cut random adapter
+    STAR/
+        ${ID}/
+            #STAR is used to map reads
+    bigWig/
+        ${ID}/
+            #convert the mapping result to bigwig format for viewing
+    clipper/
+        ${ID}/
+            #clipper is used to call peaks
+    metaPlotR/
+        ${ID}/
+    output/
+        ${ID}/
+            #peak reads, meme results
 ${GENOME_DIR}/
+    STAR_index/
+        #the genome index for STAR
     hg19/
         #hg19 will be used to map reads by STAR
 
 ```
 
-2.  Remove PCR deduplication and cut adapter using [fastp](https://github.com/OpenGene/fastp).
+4.  GRIP-seq pipeline
+
++ Remove PCR deduplication and cut adapter using [fastp](https://github.com/OpenGene/fastp).
 
 ```
 fastp -i ${ROOTDIR}/raw_data/${ID}/${NAME}_R1.fastq.gz \
@@ -123,7 +149,7 @@ fastp -i ${ROOTDIR}/raw_data/${ID}/${NAME}_R1.fastq.gz \
 --dedup
 ```
 
-3.  Cut adapter using [cutadapt](https://github.com/marcelm/cutadapt).
++ Cut adapter using [cutadapt](https://github.com/marcelm/cutadapt).
 
 ```
 cutadapt -j ${THREAD} \
@@ -134,7 +160,7 @@ u 10 -u -12 \
 -o ${ROOTDIR}/cutadapt/${ID}/${NAME}_R2_cutadapt_fastp_dedup_adapter.fastq.gz ${ROOTDIR}/fastp/${ID}/${NAME}_R2_fastp_dedup_adapter.fastq.gz;
 ```
 
-4.  Map reads using [STAR](https://github.com/alexdobin/STAR).
++ Map reads using [STAR](https://github.com/alexdobin/STAR).
 
 ```
 STAR  --runThreadN 40 \
