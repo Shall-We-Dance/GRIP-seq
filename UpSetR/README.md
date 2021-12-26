@@ -1,3 +1,5 @@
+![homepic](imgs/home.png)
+
 # GRIP-seq
 
 ## UpSet Plot
