@@ -171,30 +171,24 @@ STAR  --runThreadN 40 \
 --outSAMtype BAM SortedByCoordinate ;
 ```
 
-5.  Index the mapping output `.bam` file using [samtools](https://www.htslib.org).
++ Index the mapping output `.bam` file using [samtools](https://www.htslib.org).
 
 ```
 samtools index -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam;
 ```
 
-6.  Generate `.bw` file (bigwig) for mapping output using [deepTools](https://github.com/deeptools/deepTools).
++ Generate `.bw` file (bigwig) for mapping output using [deepTools](https://github.com/deeptools/deepTools).
 
 ```
 bamCoverage -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam \
 -o ${ROOTDIR}/bigWig/${ID}/${NAME}.bigwig;
 ```
 
-7.  Call peaks using [Clipper](https://github.com/YeoLab/clipper).
++ Call peaks using [Clipper](https://github.com/YeoLab/clipper).
 
 ```
 
 ```
   
   📒NOTE: We do not recommend using [MACS](https://github.com/macs3-project/MACS) to call peaks, our result is quite different form the model used by MACS, I've tried that tools but the result is week.
-
-8.  Intersect output `.bam` with RefSeq to identify mRNA reads using [bedtools](https://github.com/arq5x/bedtools2).
-
-```
-
-```
 
