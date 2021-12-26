@@ -1,3 +1,5 @@
+![homepic](imgs/home.png)
+
 # GRIP-seq
 
 Here is the repositories of our unpublished paper, which introduciong a new technique **GRIP-seq**.
