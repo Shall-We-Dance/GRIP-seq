@@ -35,7 +35,7 @@ conda activate GRIP-seq
 
   The structure should be like:
   
-  ```
+```
 ${TOOLSDIR}/
     meme/
         #Using meme to find motif
