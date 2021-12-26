@@ -135,7 +135,7 @@ ${GENOME_DIR}/
 conda activate GRIP-seq
 ```
 
-+ Remove PCR deduplication and cut adapter using [fastp](https://github.com/OpenGene/fastp).
++ **Remove PCR deduplication and cut adapter using [fastp](https://github.com/OpenGene/fastp).**
 
 ```
 fastp -i ${ROOTDIR}/raw_data/${ID}/${NAME}_R1.fastq.gz \
@@ -148,7 +148,7 @@ fastp -i ${ROOTDIR}/raw_data/${ID}/${NAME}_R1.fastq.gz \
 --dedup
 ```
 
-+ Cut adapter using [cutadapt](https://github.com/marcelm/cutadapt).
++ **Cut adapter using [cutadapt](https://github.com/marcelm/cutadapt).**
 
 ```
 cutadapt -j ${THREAD} \
@@ -159,7 +159,7 @@ u 10 -u -12 \
 -o ${ROOTDIR}/cutadapt/${ID}/${NAME}_R2_cutadapt_fastp_dedup_adapter.fastq.gz ${ROOTDIR}/fastp/${ID}/${NAME}_R2_fastp_dedup_adapter.fastq.gz;
 ```
 
-+ Map reads using [STAR](https://github.com/alexdobin/STAR).
++ **Map reads using [STAR](https://github.com/alexdobin/STAR).**
 
 ```
 STAR  --runThreadN ${CPU_THREADS} \
@@ -175,20 +175,20 @@ STAR  --runThreadN ${CPU_THREADS} \
   ulimit -n 65535
   ```
 
-+ Index the mapping output `.bam` file using [samtools](https://www.htslib.org).
++ **Index the mapping output `.bam` file using [samtools](https://www.htslib.org).**
 
 ```
 samtools index -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam;
 ```
 
-+ Generate `.bw` file (bigwig) for mapping output using [deepTools](https://github.com/deeptools/deepTools).
++ **Generate `.bw` file (bigwig) for mapping output using [deepTools](https://github.com/deeptools/deepTools).**
 
 ```
 bamCoverage -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam \
 -o ${ROOTDIR}/bigWig/${ID}/${NAME}.bigwig;
 ```
 
-+ Call peaks using [Clipper](https://github.com/YeoLab/clipper).
++ **Call peaks using [Clipper](https://github.com/YeoLab/clipper).**
 
 ```
 # activate conda evironment - clipper3
