@@ -24,13 +24,32 @@ conda activate GRIP-seq
 
 ### Usage
 
-1.  Make a directory `<ANALYSIS_DIR>` for this analysis, put your raw data at `<ANALYSIS_DIR>/raw_data` folder. 
+1.  Make directories.
 
-2.  Make a directory `<GENOME_DIR>` for [STAR](https://github.com/alexdobin/STAR), which is a important tool used in our analysis. 
++ Make a directory `ANALYSIS_DIR` for this analysis, put your raw data at `ANALYSIS_DIR/raw_data` folder. 
+
++ Make a directory `GENOME_DIR` for [STAR](https://github.com/alexdobin/STAR), which is a important tool used in our analysis. 
 
   The structure should be like:
+  
+  ```
+${TOOLSDIR}/
+    meme/
+        #Using meme to find motif
+    STAR/
+        #Using STAR to map reads
+    clipper/
+        #Using clipper to call peaks
+${ANALYSIS_DIR}/
+    raw_data/
+        # Your reads files
+${GENOME_DIR}/
+    hg19/
+        #hg19 will be used to map reads by STAR
 
-3.  To use our GRIP-seq pipeline, run `GRIP-seq.sh` with presets below.
+```
+
+2.  To use our GRIP-seq pipeline, run `GRIP-seq.sh` with presets below.
 
 <ANALYSIS_DIR>
 <GENOME_DIR>
@@ -56,25 +75,6 @@ The options include:
   --dir The root dir <ANALYSIS_DIR> of our analysis
 ```
 
-  
-4.  You should have a dir like this after set up:
-  
-```
-${TOOLSDIR}/
-    meme/
-        #Using meme to find motif
-    STAR/
-        #Using STAR to map reads
-    clipper/
-        #Using clipper to call peaks
-${ANALYSIS_DIR}/
-    raw_data/
-        # Your reads files
-${GENOME_DIR}/
-    hg19/
-        #hg19 will be used to map reads by STAR
-
-```
   
   
 ### Steps in detail
