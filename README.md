@@ -202,7 +202,7 @@ clipper -b ${ROOTDIR}/STAR/${INID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.
 
   To find out the summits of the peaks, run:
   ```
-  zcat ${ROOTDIR}/${NAME}.peak.bed.gz |  awk -F"\t" '{if ($6=="+") print $1"\t"$2+2"\t"$2+3"\t"$4"\t"$5"\t"$6; else print $1"\t"$3-3"\t"$3-2"\t"$4"\t"$5"\t"$6}' > ${ROOTDIR}/${NAME}.summit.bed
+  zcat ${ROOTDIR}/${NAME}.peak.bed.gz | awk -F"\t" '{if ($6=="+") print $1"\t"$2+2"\t"$2+3"\t"$4"\t"$5"\t"$6; else print $1"\t"$3-3"\t"$3-2"\t"$4"\t"$5"\t"$6}' > ${ROOTDIR}/${NAME}.summit.bed
   sort -k1,1 -k2,2n ${ROOTDIR}/${NAME}.summit.bed > ${ROOTDIR}/${NAME}.summit.sorted.bed
   ```
   
