@@ -33,9 +33,9 @@ conda activate GRIP-seq
 
 + Make a directory `GENOME_DIR` for [STAR](https://github.com/alexdobin/STAR) to generate genome index. 
 
-+ Make a directory `TOOLS_DIR` for [STAR](https://github.com/alexdobin/STAR), [meme](https://meme-suite.org/meme/doc/download.html), [metaPlotR](https://github.com/olarerin/metaPlotR) and [clipper](https://github.com/YeoLab/clipper). 
++ Make a directory `TOOLS_DIR`, and install these 4 tools: [STAR](https://github.com/alexdobin/STAR), [meme](https://meme-suite.org/meme/doc/download.html), [metaPlotR](https://github.com/olarerin/metaPlotR) and [clipper](https://github.com/YeoLab/clipper). 
 
-  The structure should be like:
+  The directory structure should be like:
   
 ```
 ${TOOLS_DIR}/
@@ -45,12 +45,12 @@ ${TOOLS_DIR}/
         #Using STAR to map reads
     clipper/
         #Using clipper to call peaks
+    metaPlotR/
+        #Using clipper to create metagene plots
 ${ANALYSIS_DIR}/
     raw_data/
         # Your reads files
 ${GENOME_DIR}/
-    hg19/
-        #hg19 will be used to map reads by STAR
 
 ```
 
@@ -87,7 +87,7 @@ mkdir -p ${ANALYSIS_DIR}/macs2/${ANALYSIS_DIR}
 mkdir -p ${ANALYSIS_DIR}/output/${ANALYSIS_DIR}
 ```
   
-  
+  The directory structure should be like: 
   
   
   
