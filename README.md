@@ -25,7 +25,7 @@ conda activate GRIP-seq
 ```
 ## Pipeline
 
-1.  Make directories.
+### 1.  Make directories.
 
 + Make a directory `ANALYSIS_DIR` for this analysis, put your raw data at `ANALYSIS_DIR/raw_data` folder. 
 
@@ -52,7 +52,7 @@ ${GENOME_DIR}/
 
 ```
 
-2.  Generate genome indexes for [STAR](https://github.com/alexdobin/STAR)
+### 2.  Generate genome indexes for [STAR](https://github.com/alexdobin/STAR)
 
   ```
   #basic usage
@@ -74,7 +74,7 @@ ${GENOME_DIR}/
   bash scripts/generate_genome_index.sh ${GENOME_DIR} ${CPU_THREADS} ${INDEX_LENGTH}
   ```
 
-3.  Make directory for GRIP-seq pipeline.
+### 3.  Make directory for GRIP-seq pipeline.
   
 ```
 mkdir -p ${ANALYSIS_DIR}/fastp/${ID}
@@ -128,7 +128,7 @@ ${GENOME_DIR}/
 
 ```
 
-4.  GRIP-seq pipeline
+### 4.  GRIP-seq pipeline
 
 ```
 # activate conda evironment - GRIP-seq
