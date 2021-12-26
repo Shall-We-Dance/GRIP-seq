@@ -52,45 +52,18 @@ ${GENOME_DIR}/
 
 ```
 
-2.  To use our GRIP-seq pipeline, run `GRIP-seq.sh` with presets below.
+2.  Generate genome indexes for [STAR](https://github.com/alexdobin/STAR)
 
-<ANALYSIS_DIR>
-<GENOME_DIR>
-<READS_NAME>
-<LENGTH>
 
-```
-bash GRIP-seq.sh --dir <ANALYSIS_DIR> --
-```
-
-```
-###################
-##GRIP-seq manual##
-###################
-
-Version: v1.0.0
-Code: https://github.com/Shall-We-Dance/GRIP-seq
-
-Usage:  bash GRIP-seq.sh [options]
-
-The options include:
-  --help  Print this help menu.
-  --dir The root dir <ANALYSIS_DIR> of our analysis
-```
-
-  
-  
-### Steps in detail
-
-1.  Make directory for GRIP-seq pipeline.
+3.  Make directory for GRIP-seq pipeline.
   
 ```
-mkdir -p <ANALYSIS_DIR>/fastp/<ANALYSISI_ID>
-mkdir -p <ANALYSIS_DIR>/cutadapt/<ANALYSISI_ID>
-mkdir -p <ANALYSIS_DIR>/STAR/<ANALYSISI_ID>
-mkdir -p <ANALYSIS_DIR>/bigWig/<ANALYSISI_ID>
-mkdir -p <ANALYSIS_DIR>/macs2/<ANALYSISI_ID>
-mkdir -p <ANALYSIS_DIR>/output/<ANALYSISI_ID>
+mkdir -p ${ANALYSIS_DIR}/fastp/${ANALYSIS_DIR}
+mkdir -p ${ANALYSIS_DIR}/cutadapt/${ANALYSIS_DIR}
+mkdir -p ${ANALYSIS_DIR}/STAR/${ANALYSIS_DIR}
+mkdir -p ${ANALYSIS_DIR}/bigWig/${ANALYSIS_DIR}
+mkdir -p ${ANALYSIS_DIR}/macs2/${ANALYSIS_DIR}
+mkdir -p ${ANALYSIS_DIR}/output/${ANALYSIS_DIR}
 ```
   
 2.  Remove PCR deduplication and cut adapter using [fastp](https://github.com/OpenGene/fastp).
