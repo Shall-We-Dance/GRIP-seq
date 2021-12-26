@@ -31,12 +31,14 @@ conda activate GRIP-seq
 
 + Make a directory `ANALYSIS_DIR` for this analysis, put your raw data at `ANALYSIS_DIR/raw_data` folder. 
 
-+ Make a directory `GENOME_DIR` for [STAR](https://github.com/alexdobin/STAR), which is a important tool used in our analysis. 
++ Make a directory `GENOME_DIR` for [STAR](https://github.com/alexdobin/STAR) to generate genome index. 
+
++ Make a directory `TOOLS_DIR` for [STAR](https://github.com/alexdobin/STAR), [meme](https://meme-suite.org/meme/doc/download.html), [metaPlotR](https://github.com/olarerin/metaPlotR) and [clipper](https://github.com/YeoLab/clipper). 
 
   The structure should be like:
   
 ```
-${TOOLSDIR}/
+${TOOLS_DIR}/
     meme/
         #Using meme to find motif
     STAR/
