@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#STAR_Generate
+#GRIP-seq pipeline
+
+# Exit the script if an error happens
+set -e
+
+if [[ $# -eq 0 ]]; then
+  echo "Error: GENOME_DIR must be provided as an input argument."
+  exit 1
+fi
+
+GENOME_DIR="$1"
+CPU_THREADS=8
+DOWNLOAD_MODE="${2:-full_dbs}"  # Default using 8 threads
+# activate enviroment:
+source ~/.bashrc
+
+mkdir -p ${GENOME_DIR}/hg19
+
+echo "Downloading Fasta File to ${DOWNLOAD_MODE} ..."
+wget -P ${GENOME_DIR} https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_19/GRCh37.p13.genome.fa.gz
+
+echo "Downloading GTF File to ${DOWNLOAD_MODE} ..."
+wget -P ${GENOME_DIR} https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_19/gencode.v19.chr_patch_hapl_scaff.annotation.gtf.gz
+
+echo "Running STAR to generate genome index ..."
+mkdir -p ${GENOME_DIR}/STAR_index
+STAR --runThreadN ${CPU} \
+--runMode genomeGenerate \
+--genomeDir ${GENOME_DIR}/STAR_index \
+--genomeFastaFiles ${GENOME_DIR}/hg19/GRCh37.p13.genome.fa \
+--sjdbGTFfile ${GENOME_DIR}/hg19/gencode.v19.chr_patch_hapl_scaff.annotation.gtf \
+--sjdbOverhang 50
