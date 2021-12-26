@@ -12,8 +12,8 @@ if [[ $# -eq 0 ]]; then
 fi
 
 GENOME_DIR="$1"
-CPU_THREADS=8
-DOWNLOAD_MODE="${2:-full_dbs}"  # Default using 8 threads
+CPU_THREADS=${2:-"8"}  # Default using 8 threads
+INDEX_LENGTH=${3:-"100"}  # Default using 100 as the index length
 # activate enviroment:
 source ~/.bashrc
 
@@ -27,9 +27,9 @@ wget -P ${GENOME_DIR} https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/
 
 echo "Running STAR to generate genome index ..."
 mkdir -p ${GENOME_DIR}/STAR_index
-STAR --runThreadN ${CPU} \
+STAR --runThreadN ${CPU_THREADS} \
 --runMode genomeGenerate \
 --genomeDir ${GENOME_DIR}/STAR_index \
 --genomeFastaFiles ${GENOME_DIR}/hg19/GRCh37.p13.genome.fa \
 --sjdbGTFfile ${GENOME_DIR}/hg19/gencode.v19.chr_patch_hapl_scaff.annotation.gtf \
---sjdbOverhang 50
+--sjdbOverhang ${INDEX_LENGTH}
