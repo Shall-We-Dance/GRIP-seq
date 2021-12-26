@@ -206,3 +206,4 @@ clipper -b ${ROOTDIR}/STAR/${INID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.
 
 Using [UpSetR](https://github.com/hms-dbmi/UpSetR).
 
+To finish this step, please refer to `UpSetR` folder.
