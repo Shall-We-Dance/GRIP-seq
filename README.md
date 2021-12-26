@@ -169,6 +169,7 @@ STAR  --runThreadN ${CPU_THREADS} \
 --outFileNamePrefix ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bam \
 --outSAMtype BAM SortedByCoordinate ;
 ```
+
   If you meet the `File size limit exceeded(core dumped)` error, run command below to fix it.
   ```
   ulimit -n 65535
