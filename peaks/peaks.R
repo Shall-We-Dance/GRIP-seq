@@ -27,27 +27,37 @@ for(i in 1:nrow(raw)){
   ref_chr=filter(ref, chr == raw[i,1])
   #select No.i peak to identify
   if (raw[i,4] == '-'){
-    temp_high <- data.frame(raw[i,1],raw[i,3]-3)
-    colnames(temp_high) <- c("chr","postion")
-    temp_low <- data.frame(raw[i,1],raw[i,3]+3)
-    colnames(temp_low) <- c("chr","postion")
+    temp_high_3 <- data.frame(raw[i,1],raw[i,3]-3)
+    colnames(temp_high_3) <- c("chr","postion")
+    temp_high_5 <- data.frame(raw[i,1],raw[i,3]-5)
+    colnames(temp_high_5) <- c("chr","postion")
+    temp_low_3 <- data.frame(raw[i,1],raw[i,3]+3)
+    colnames(temp_low_3) <- c("chr","postion")
+    temp_low_5 <- data.frame(raw[i,1],raw[i,3]+5)
+    colnames(temp_low_5) <- c("chr","postion")
   }
   if (raw[i,4] == '+'){
-    temp_high <- data.frame(raw[i,1],raw[i,2]+3)
-    colnames(temp_high) <- c("chr","postion")
-    temp_low <- data.frame(raw[i,1],raw[i,2]-3)
-    colnames(temp_low) <- c("chr","postion")
+    temp_high_3 <- data.frame(raw[i,1],raw[i,3]+3)
+    colnames(temp_high_3) <- c("chr","postion")
+    temp_high_5 <- data.frame(raw[i,1],raw[i,3]+5)
+    colnames(temp_high_5) <- c("chr","postion")
+    temp_low_3 <- data.frame(raw[i,1],raw[i,3]-3)
+    colnames(temp_low_3) <- c("chr","postion")
+    temp_low_5 <- data.frame(raw[i,1],raw[i,3]-5)
+    colnames(temp_low_5) <- c("chr","postion")
   }
-  temp <- temp_high
-  temp <- bind_rows(temp,temp_low)
+  temp <- temp_high_3
+  temp <- bind_rows(temp,temp_high_5)
+  temp <- bind_rows(temp,temp_low_3)
+  temp <- bind_rows(temp,temp_low_5)
   temp <- left_join(temp,ref_chr,by=c("chr","postion"))
   #get depth
   #temp_high <- left_join(temp_high,ref_chr,by=c("chr","postion"))
   #temp_low <- left_join(temp_low,ref_chr,by=c("chr","postion"))
-  if(is.na(temp[1,3]) | is.na(temp[2,3])){
+  if(is.na(temp[1,3]) | is.na(temp[2,3]) | is.na(temp[3,3]) | is.na(temp[4,3])){
   }
   else{
-    if(temp[1,3]/temp[2,3] > threshhold){
+    if(temp[1,3]/temp[3,3] > threshhold | temp[2,3]/temp[4,3] > threshhold | temp[1,3]/temp[4,3] > threshhold | temp[2,3]/temp[3,3] > threshhold){
       if (raw[i,4] == '-'){
         temp_peak <- data.frame(V1=raw[i,1],V2=(raw[i,3]-5):(raw[i,3]+5))
         colnames(temp_peak) <- c("chr","postion")
