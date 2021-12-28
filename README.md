@@ -190,17 +190,7 @@ bamCoverage -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.ou
 -o ${ROOTDIR}/bigWig/${ID}/${NAME}.bigwig;
 ```
 
-+ **Call peaks using [Clipper](https://github.com/YeoLab/clipper).**
-
-```
-# activate conda evironment - clipper3
-conda activate clipper3
-
-clipper -b ${ROOTDIR}/STAR/${INID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam \
--s hg19 \
--o ${ROOTDIR}/clipper/${ID}/${NAME}.peak.bed \
---FDR 0.01 --poisson-cutoff 1e-50 --minreads 5 --binomial 0.01
-```
++ Call peaks using [our protocol](/peaks).
 
   To find out the summits of the peaks, run:
   ```
