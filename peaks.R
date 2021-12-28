@@ -18,7 +18,6 @@ raw <- read.table(raw_input,header=F)
 ref <- read.table(ref_input,header=F)
 
 
-#初始化结果
 result <- raw[0,]
 colnames(result) <- c("chr","start","end","strain")
 colnames(ref) <- c("chr","postion","depth")
