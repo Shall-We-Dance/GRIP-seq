@@ -12,3 +12,7 @@ clipper -b ${ROOTDIR}/STAR/${INID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.
 -o ${ROOTDIR}/clipper/${ID}/${NAME}.peak.bed \
 --FDR 0.01 --poisson-cutoff 1e-50 --minreads 5 --binomial 0.01
 ```
+
++ **Separate summits form clipper results.**
+
++ **Call peaks for GRIP-seq using our R scirpts [peaks.R](peaks.R).**
