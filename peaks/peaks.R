@@ -29,33 +29,33 @@ for(i in 1:nrow(raw)){
   if (raw[i,4] == '-'){
     temp_high_3 <- data.frame(raw[i,1],raw[i,3]-3)
     colnames(temp_high_3) <- c("chr","postion")
-    temp_high_5 <- data.frame(raw[i,1],raw[i,3]-8)
-    colnames(temp_high_5) <- c("chr","postion")
+    temp_high_8 <- data.frame(raw[i,1],raw[i,3]-8)
+    colnames(temp_high_8) <- c("chr","postion")
     temp_low_3 <- data.frame(raw[i,1],raw[i,3]+3)
     colnames(temp_low_3) <- c("chr","postion")
-    temp_low_5 <- data.frame(raw[i,1],raw[i,3]+8)
-    colnames(temp_low_5) <- c("chr","postion")
+    temp_low_8 <- data.frame(raw[i,1],raw[i,3]+8)
+    colnames(temp_low_8) <- c("chr","postion")
   }
   if (raw[i,4] == '+'){
     temp_high_3 <- data.frame(raw[i,1],raw[i,3]+3)
     colnames(temp_high_3) <- c("chr","postion")
-    temp_high_5 <- data.frame(raw[i,1],raw[i,3]+8)
-    colnames(temp_high_5) <- c("chr","postion")
+    temp_high_8 <- data.frame(raw[i,1],raw[i,3]+8)
+    colnames(temp_high_8) <- c("chr","postion")
     temp_low_3 <- data.frame(raw[i,1],raw[i,3]-3)
     colnames(temp_low_3) <- c("chr","postion")
-    temp_low_5 <- data.frame(raw[i,1],raw[i,3]-8)
-    colnames(temp_low_5) <- c("chr","postion")
+    temp_low_8 <- data.frame(raw[i,1],raw[i,3]-8)
+    colnames(temp_low_8) <- c("chr","postion")
   }
   temp <- temp_high_3
-  temp <- bind_rows(temp,temp_high_5)
+  temp <- bind_rows(temp,temp_high_8)
   temp <- bind_rows(temp,temp_low_3)
-  temp <- bind_rows(temp,temp_low_5)
+  temp <- bind_rows(temp,temp_low_8)
   temp <- left_join(temp,ref_chr,by=c("chr","postion"))
   #get depth
   #is.na
   for( k in 1:4){
-    if(is.na(temp[i,4])){
-    temp[i,4] <- 5
+    if(is.na(temp[k,4])){
+    temp[k,4] <- 5
     }
   } 
   if(temp[1,3]/temp[3,3] > threshhold | temp[2,3]/temp[4,3] > threshhold | temp[1,3]/temp[4,3] > threshhold | temp[2,3]/temp[3,3] > threshhold){
