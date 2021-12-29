@@ -110,7 +110,7 @@ getpeaks <- function(i){
   }
 }
 
-results <- parapply(cl,xrow,getpeaks)
+results <- parApply(cl,xrow,getpeaks)
 result <- do.call('rbind',results)
 stopCluster(cl)
 write.table(result,file=output_file_name,sep="\t",row.names = F,col.names = F,quote = F)
