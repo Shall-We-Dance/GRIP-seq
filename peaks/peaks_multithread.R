@@ -7,28 +7,28 @@
 library(dplyr)
 library(parallel)
 #import data
-args <- commandArgs(trailingOnly=TRUE)
-raw_input <- args[1]
-ref_input <- args[2]
-threshhold <- args[3]
-threshhold_peak <- args[3]
+
 output_file_name <- args[4]
 
 
-raw <- read.table(raw_input,header=F)
-ref <- read.table(ref_input,header=F)
 
-
-result <- raw[0,]
-colnames(result) <- c("chr","start","end","strain")
-colnames(ref) <- c("chr","postion","depth")
 
 cores <- detectCores(logical = FALSE)
 
-cl <- makeCluster(cores)
+cl <- makeCluster(10)
 xrow <- 1:nrow(raw)
 
 getpeaks <- function(i){
+  args <- commandArgs(trailingOnly=TRUE)
+  raw_input <- args[1]
+  ref_input <- args[2]
+  threshhold <- args[3]
+  threshhold_peak <- args[3]
+  raw <- read.table(raw_input,header=F)
+  ref <- read.table(ref_input,header=F)
+
+  colnames(result) <- c("chr","start","end","strain")
+  colnames(ref) <- c("chr","postion","depth")
   print(i)
   ref_chr=filter(ref, chr == raw[i,1])
   #select No.i peak to identify
@@ -110,7 +110,7 @@ getpeaks <- function(i){
   }
 }
 
-results <- parApply(cl,xrow,getpeaks)
+results <- parLapply(cl,xrow,fun = getpeaks)
 result <- do.call('rbind',results)
 stopCluster(cl)
 write.table(result,file=output_file_name,sep="\t",row.names = F,col.names = F,quote = F)
