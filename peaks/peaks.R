@@ -53,9 +53,9 @@ for(i in 1:nrow(raw)){
   temp <- left_join(temp,ref_chr,by=c("chr","postion"))
   #get depth
   #is.na
-  for( k in 1:4){
-    if(is.na(temp[k,4])){
-    temp[k,4] <- 5
+  for(k in 1:4){
+    if(is.na(temp[k,3])){
+    temp[k,3] <- 5
     }
   } 
   if(temp[1,3]/temp[3,3] > threshhold | temp[2,3]/temp[4,3] > threshhold | temp[1,3]/temp[4,3] > threshhold | temp[2,3]/temp[3,3] > threshhold){
