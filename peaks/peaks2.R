@@ -97,10 +97,18 @@ for(i in 1:nrow(prepeaks)){
   p4$tick()
   for(j in 21:35){
     if(prepeaks[i,j] / prepeaks[i,j+1] > threshhold_peak){
-      temp_peak <- data.frame(prepeaks[i,1],prepeaks[i,j-16],prepeaks[i,j+1-16],prepeaks[i,4])
-      colnames(temp_peak) <- c("chr","start","end","strain")
-      peaks <- bind_rows(peaks,temp_peak)
-      break
+      if(prepeaks[i,4] == "-"){
+        temp_peak <- data.frame(prepeaks[i,1],(prepeaks[i,j-16]-1),(prepeaks[i,j+1-16]-1),prepeaks[i,4])
+        colnames(temp_peak) <- c("chr","start","end","strain")
+        peaks <- bind_rows(peaks,temp_peak)
+        break
+      }
+      if(prepeaks[i,4] == "+"){
+        temp_peak <- data.frame(prepeaks[i,1],prepeaks[i,j+1-16],prepeaks[i,j-16],prepeaks[i,4])
+        colnames(temp_peak) <- c("chr","start","end","strain")
+        peaks <- bind_rows(peaks,temp_peak)
+        break
+      }
     }
   }
 }
