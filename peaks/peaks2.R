@@ -18,7 +18,7 @@ output_file_name <- args[4]
 raw <- read.table(raw_input,header=F)
 ref <- read.table(ref_input,header=F)
 
-colnames(raw) <- c("chr","start","end","strain")
+colnames(raw) <- c("chr","start","end","name","pval","strain")
 colnames(ref) <- c("chr","postion","depth")
 prepeaks <- raw[0,]
 peaks <- raw[0,]
@@ -27,20 +27,20 @@ p1 <- progress_bar$new(total = nrow(temp))
 print("Initializing...")
 for(i in 1:nrow(temp)){
   p1$tick()
-  if (temp[i,4] == '-'){
-    temp[i,5] <- temp[i,3] - 3
-    temp[i,6] <- temp[i,3] - 8
-    temp[i,7] <- temp[i,3] + 3
-    temp[i,8] <- temp[i,3] + 8
-  }
-  if (temp[i,4] == '+'){
-    temp[i,5] <- temp[i,3] + 3
-    temp[i,6] <- temp[i,3] + 8
+  if (temp[i,6] == '-'){
     temp[i,7] <- temp[i,3] - 3
     temp[i,8] <- temp[i,3] - 8
+    temp[i,9] <- temp[i,3] + 3
+    temp[i,10] <- temp[i,3] + 8
+  }
+  if (temp[i,6] == '+'){
+    temp[i,7] <- temp[i,3] + 3
+    temp[i,8] <- temp[i,3] + 8
+    temp[i,9] <- temp[i,3] - 3
+    temp[i,10] <- temp[i,3] - 8
   }
 }
-colnames(temp) <- c("chr","start","end","strain","high3","high8","low3","low8")
+colnames(temp) <- c("chr","start","end","name","pval","strain","high3","high8","low3","low8")
 print("Finding depth...")
 temp <- left_join(temp,ref,by=c("chr","high3"="postion"))
 temp <- left_join(temp,ref,by=c("chr","high8"="postion"))
@@ -53,8 +53,8 @@ p2 <- progress_bar$new(total = nrow(temp))
 print("Finding peaks (1st trun)...")
 for(i in 1:nrow(temp)){
   p2$tick()
-  if (temp[i,9] / temp[i,11] > threshhold | temp[i,9] / temp[i,12] > threshhold | temp[i,10] / temp[i,11] > threshhold | temp[i,10] / temp[i,12] > threshhold){
-    prepeaks <- bind_rows(prepeaks,temp[i,1:4])
+  if (temp[i,11] / temp[i,13] > threshhold | temp[i,11] / temp[i,14] > threshhold | temp[i,12] / temp[i,13] > threshhold | temp[i,12] / temp[i,14] > threshhold){
+    prepeaks <- bind_rows(prepeaks,temp[i,1:6])
   }
 }
 
@@ -62,15 +62,15 @@ p3 <- progress_bar$new(total = nrow(prepeaks))
 print("Successed, starting the 2nd turn...")
 for(i in 1:nrow(prepeaks)){
   p3$tick()
-  if (prepeaks[i,4] == '-'){
-    prepeaks[i,5:20] <- (prepeaks[i,3] - 8):(prepeaks[i,3] + 7)
+  if (prepeaks[i,6] == '-'){
+    prepeaks[i,7:22] <- (prepeaks[i,3] - 8):(prepeaks[i,3] + 7)
   }
-  if (prepeaks[i,4] == '+'){
-    prepeaks[i,5:20] <- (prepeaks[i,2] + 7):(prepeaks[i,2] - 8)
+  if (prepeaks[i,6] == '+'){
+    prepeaks[i,7:22] <- (prepeaks[i,2] + 7):(prepeaks[i,2] - 8)
   }
 }
 
-colnames(prepeaks) <- c("chr","start","end","strain","p1","p2","p3","p4","p5","p6","p7","p8","p9","p10","p11","p12","p13","p14","p15","p16")
+colnames(prepeaks) <- c("chr","start","end","name","pval","strain","p1","p2","p3","p4","p5","p6","p7","p8","p9","p10","p11","p12","p13","p14","p15","p16")
 print("Finding depth...")
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p1"="postion"))
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p2"="postion"))
@@ -95,17 +95,17 @@ p4 <- progress_bar$new(total = nrow(prepeaks))
 print("Finding peaks (2nd trun)...")
 for(i in 1:nrow(prepeaks)){
   p4$tick()
-  for(j in 21:35){
+  for(j in 23:37){
     if(prepeaks[i,j] / prepeaks[i,j+1] > threshhold_peak){
-      if(prepeaks[i,4] == "-"){
-        temp_peak <- data.frame(prepeaks[i,1],(prepeaks[i,j-16]-1),(prepeaks[i,j+1-16]-1),prepeaks[i,4])
-        colnames(temp_peak) <- c("chr","start","end","strain")
+      if(prepeaks[i,6] == "-"){
+        temp_peak <- data.frame(prepeaks[i,1],(prepeaks[i,j-16]-1),(prepeaks[i,j+1-16]-1),prepeaks[i,4],prepeaks[i,5],prepeaks[i,6])
+        colnames(temp_peak) <- c("chr","start","end","name","pval","strain")
         peaks <- bind_rows(peaks,temp_peak)
         break
       }
-      if(prepeaks[i,4] == "+"){
-        temp_peak <- data.frame(prepeaks[i,1],prepeaks[i,j+1-16],prepeaks[i,j-16],prepeaks[i,4])
-        colnames(temp_peak) <- c("chr","start","end","strain")
+      if(prepeaks[i,6] == "+"){
+        temp_peak <- data.frame(prepeaks[i,1],prepeaks[i,j+1-16],prepeaks[i,j-16],prepeaks[i,4],prepeaks[i,5],prepeaks[i,6])
+        colnames(temp_peak) <- c("chr","start","end","name","pval","strain")
         peaks <- bind_rows(peaks,temp_peak)
         break
       }
