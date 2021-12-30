@@ -1,4 +1,4 @@
-![homepic](imgs/home.png)
+<!--![homepic](imgs/home.png)-->
 
 # GRIP-seq
 
