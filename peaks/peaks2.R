@@ -97,11 +97,14 @@ for(i in 1:nrow(prepeaks)){
   p4$tick()
   for(j in 21:35){
     if(prepeaks[i,j] / prepeaks[i,j+1] > threshhold_peak){
-      peaks <- bind_rows(peaks,prepeaks[i,1:4])
+      temp_peak <- data.frame(prepeaks[i,1],prepeaks[i,j],prepeaks[i,j+1],prepeaks[i,4])
+      colnames(temp_peak) <- c("chr","start","end","strain")
+      peaks <- bind_rows(peaks,temp_peak)
       break
     }
   }
 }
 print("Successed...")
 print("Writing into file...")
+print("Finished...")
 write.table(peaks,file=output_file_name,sep="\t",row.names = F,col.names = F,quote = F)
