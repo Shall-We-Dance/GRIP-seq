@@ -8,6 +8,7 @@
 library(dplyr)
 library(progress)
 #import data
+print("Loading...")
 args <- commandArgs(trailingOnly=TRUE)
 raw_input <- args[1]
 ref_input <- args[2]
