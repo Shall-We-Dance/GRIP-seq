@@ -25,20 +25,6 @@ echo "ID: ${ID} ..."
 echo "Making dir for peak..."
 mkdir -p ${ROOTDIR}/peak/${ID}
 
-echo "Preparing data form clipper..."
-for NAME in ${REPEAT};
-do
-echo "Preparing data form clipper for ${NAME}..."
-cat ${ROOTDIR}/clipper/${ID}/${NAME}.peak.bed | awk -F"\t" '{if ($6=="+") print $1"\t"$2"\t"$2+1"\t"$4"\t"$5"\t"$6; else print $1"\t"$3-1"\t"$3"\t"$4"\t"$5"\t"$6}' > ${ROOTDIR}/clipper/${ID}/${NAME}.summit.bed
-done
-
-echo "Calculating mapping depth..."
-for NAME in ${REPEAT};
-do
-echo "Calculating mapping depth for ${NAME}..."
-samtools depth -l 10 ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam > ${ROOTDIR}/STAR/${ID}/${NAME}.10.coverage
-done
-
 echo "Calling peaks..."
 for NAME in ${REPEAT};
 do
