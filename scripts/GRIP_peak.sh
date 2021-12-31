@@ -39,7 +39,7 @@ do
 echo "Calling peaks for ${NAME}..."
 Rscript ../peaks/peak.R \
 ${ROOTDIR}/clipper/${ID}/${NAME}.summit.bed \
-${ROOTDIR}/STAR/${ID}/${NAME}.10.coverage \
+${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.10.coverage \
 1.4 \
 ${ROOTDIR}/peak/${ID}/${NAME}.GRIP.peak.bed
 done
