@@ -18,7 +18,6 @@ REPEAT=$(cat ./repeat.txt)
 
 ROOTDIR="$1"
 ID=${2:-"current"}  # Default ID is current
-THREAD=${3:-"8"}  # Default using 8 threads
 
 echo "ROOTDIR: ${ROOTDIR} ..."
 echo "ID: ${ID} ..."
