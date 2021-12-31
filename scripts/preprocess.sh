@@ -15,7 +15,7 @@ if [[ $# -eq 0 ]]; then
   exit 1
 fi
 
-REPEAT = WS013 WS014 WS015 WS016
+REPEAT=$(cat ./repeat.txt)
 
 ROOTDIR="$1"
 GENOMEDIR_STAR="$2"
@@ -25,6 +25,7 @@ THREAD=${4:-"8"}  # Default using 8 threads
 
 echo "ROOTDIR: ${ROOTDIR} ..."
 echo "GENOMEDIR_STAR: ${GENOMEDIR_STAR} ..."
+echo "REPEAT: ${REPEAT} ..."
 echo "ID: ${ID} ..."
 echo "Using CPU threads: ${THREAD} ..."
 
@@ -39,7 +40,8 @@ mkdir -p ${ROOTDIR}/upsetplot/${ID}
 mkdir -p ${ROOTDIR}/metaPlotR/${ID}
 
 
-print("Preprocessing the fastq files...")
+echo "Preprocessing the fastq files..."
+
 for NAME in ${REPEAT};
 do
 #fastp
@@ -49,7 +51,7 @@ fastp -i ${ROOTDIR}/raw_data/${NAME}_L003_R1_001.fastq.gz \
 -O ${ROOTDIR}/fastp/${ID}/${NAME}_R2_length.fastq.gz \
 -h ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_length.html \
 -j ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_length.json \
---thread 16 -Q -A \
+--thread ${THREAD} -Q -A \
 --length_required 101 \
 --length_limit 101
 
@@ -59,22 +61,22 @@ fastp -i ${ROOTDIR}/fastp/${ID}/${NAME}_R1_length.fastq.gz \
 -O ${ROOTDIR}/fastp/${ID}/${NAME}_R2_fastp_dedup_adapter.fastq.gz \
 -h ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_dedup_adapter.html \
 -j ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_dedup_adapter.json \
---thread 16 \
+--thread ${THREAD} \
 --length_required 40 \
 --length_limit 40 \
 --dedup
 
 #cutadapt
-cutadapt -j 40 -q 10,10 -u 12 -u -10 -o ${ROOTDIR}/cutadapt/${ID}/${NAME}_R1_cutadapt_fastp_dedup_adapter.fastq.gz ${ROOTDIR}/fastp/${ID}/${NAME}_R1_fastp_dedup_adapter.fastq.gz;
-cutadapt -j 40 -q 10,10 -u 10 -u -12 -o ${ROOTDIR}/cutadapt/${ID}/${NAME}_R2_cutadapt_fastp_dedup_adapter.fastq.gz ${ROOTDIR}/fastp/${ID}/${NAME}_R2_fastp_dedup_adapter.fastq.gz;
+cutadapt -j ${THREAD} -q 10,10 -u 12 -u -10 -o ${ROOTDIR}/cutadapt/${ID}/${NAME}_R1_cutadapt_fastp_dedup_adapter.fastq.gz ${ROOTDIR}/fastp/${ID}/${NAME}_R1_fastp_dedup_adapter.fastq.gz;
+cutadapt -j ${THREAD} -q 10,10 -u 10 -u -12 -o ${ROOTDIR}/cutadapt/${ID}/${NAME}_R2_cutadapt_fastp_dedup_adapter.fastq.gz ${ROOTDIR}/fastp/${ID}/${NAME}_R2_fastp_dedup_adapter.fastq.gz;
 done
 
 #STAR
-print("Mapping...")
+echo "Mapping..."
 ulimit -n 65535
 for NAME in ${REPEAT};
 do
-STAR  --runThreadN 40 \
+STAR  --runThreadN ${THREAD} \
 --genomeDir  ${GENOMEDIR_STAR} \
 --readFilesCommand zcat \
 --readFilesIn  ${ROOTDIR}/cutadapt/${ID}/${NAME}_R2_cutadapt_fastp_dedup_adapter.fastq.gz \
@@ -84,7 +86,7 @@ done
 
 #samtools_index_bigwig
 
-print("Indexing and calculating depth...")
+echo "Indexing and calculating depth..."
 for NAME in ${REPEAT};
 do
 samtools index -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam;
