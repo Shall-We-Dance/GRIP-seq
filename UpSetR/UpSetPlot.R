@@ -4,31 +4,29 @@
 # Email: hongjiang.liu@ucsf.edu
 
 #### Load necessary Packages ####
-library('bedtoolsr')
 library('dplyr')
-library(data.table)
 library(ggplot2)
 library("UpSetR")
-library("ComplexHeatmap")
-library(gprofiler2)
+library(progress)
 
 setwd(".")
-GRIP <- read.table("all.GRIP.sorted.merged.bed",header=F)
-CIMS <- read.table("CIMS-miCLIP.bed",header=F)
-CITS <- read.table("CITS-miCLIP.bed",header=F)
-m6Am <- read.table("miCLIP-m6Am.bed",header=F)
-all <- read.table("all.sorted.merged.bed",header=F)
-
+GRIP <- read.table("bed/all.1.4.2.GRIP.sorted.merged.bed",header=F)
+CIMS <- read.table("bed/CIMS-miCLIP.bed",header=F)
+CITS <- read.table("bed/CITS-miCLIP.bed",header=F)
+m6Am <- read.table("bed/miCLIP-m6Am.bed",header=F)
+all <- read.table("bed/all.1.4.2.sorted.merged.bed",header=F)
+outputfile <-"all.1.4.2.csv"
 all[,4:7]=0
 colnames(all) <- c("chr","start","end","GRIP","CIMS","CITS","m6Am")
 
-#Initialization
+#初始化
 xrow=1
-#Continue on breakpoint
-load("UpSet.Rdata")
-#This loop takes a long time, over 8 hours
+#断点续跑
+#load("UpSet.Rdata")
+p1 <- progress_bar$new(total = nrow(all))
+print("Making one-hot table...")
 for(i in xrow:nrow(all)){
-  print(i)
+  p1$tick()
   f_GRIP = filter(GRIP, V1 == all[i,1])
   f_CIMS = filter(CIMS, V1 == all[i,1])
   f_CITS = filter(CITS, V1 == all[i,1])
@@ -61,39 +59,120 @@ for(i in xrow:nrow(all)){
     }
   }}
   
-  if(i%%500 == 0)
-  {
-    xrow = i
-    save(all,xrow, file="UpSet.Rdata")
-    write.table(all,file="all.csv",sep="\t",row.names = F,quote = F)
-  }
-  if(i%%nrow(all) == 0)
-  {
-    xrow = i
-    save(all,xrow, file="UpSet.Rdata")
-    write.csv(all,file="all.csv",sep="\t",row.names = F,quote = F)
-  }
+#  if(i%%500 == 0)
+#  {
+#    xrow = i
+#    save(all,xrow, file="UpSet.Rdata")
+#    write.table(all,file=outputfile,sep="\t",row.names = F,quote = F)
+#  }
+#  if(i%%nrow(all) == 0)
+#  {
+#    xrow = i
+#    save(all,xrow, file="1.6.UpSet.Rdata")
+#    write.table(all,file=outputfile,sep="\t",row.names = F,quote = F)
+#  }
 }
-write.table(all,file="all.csv",sep="\t",row.names = F,quote = F)
 
-write.csv(all,file="output_onehot.csv",sep="\t",row.names = F, col.names = T,quote = F)
-df = read.csv("all.csv")
-colnames(df) <- c("chr","start","end","GRIP","CIMS-miCLIP","CITS-miCLIP","m6Am-miCLIP")
+p2 <- progress_bar$new(total = nrow(all))
+print("Converting...")
+for(k in 1:nrow(all)){
+  p2$tick()
+  if(all[k,1] == "chr1"){
+    all[k,1] <- 1
+  }
+  if(all[k,1] == "chr2"){
+    all[k,1] <- 2
+  }
+  if(all[k,1] == "chr3"){
+    all[k,1] <- 3
+  }
+  if(all[k,1] == "chr4"){
+    all[k,1] <- 4
+  }
+  if(all[k,1] == "chr5"){
+    all[k,1] <- 5
+  }
+  if(all[k,1] == "chr6"){
+    all[k,1] <- 6
+  }
+  if(all[k,1] == "chr7"){
+    all[k,1] <- 7
+  }
+  if(all[k,1] == "chr8"){
+    all[k,1] <- 8
+  }
+  if(all[k,1] == "chr9"){
+    all[k,1] <- 9
+  }
+  if(all[k,1] == "chr10"){
+    all[k,1] <- 10
+  }
+  if(all[k,1] == "chr11"){
+    all[k,1] <- 11
+  }
+  if(all[k,1] == "chr12"){
+    all[k,1] <- 12
+  }
+  if(all[k,1] == "chr13"){
+    all[k,1] <- 13
+  }
+  if(all[k,1] == "chr14"){
+    all[k,1] <- 14
+  }
+  if(all[k,1] == "chr15"){
+    all[k,1] <- 15
+  }
+  if(all[k,1] == "chr16"){
+    all[k,1] <- 16
+  }
+  if(all[k,1] == "chr17"){
+    all[k,1] <- 17
+  }
+  if(all[k,1] == "chr18"){
+    all[k,1] <- 18
+  }
+  if(all[k,1] == "chr19"){
+    all[k,1] <- 19
+  }
+  if(all[k,1] == "chr20"){
+    all[k,1] <- 20
+  }
+  if(all[k,1] == "chr21"){
+    all[k,1] <- 21
+  }
+  if(all[k,1] == "chr22"){
+    all[k,1] <- 22
+  }
+  if(all[k,1] == "chrX"){
+    all[k,1] <- 23
+  }
+  if(all[k,1] == "chrY"){
+    all[k,1] <- 24
+  }
+  if(all[k,1] == "chrM"){
+    all[k,1] <- 25
+  }
+  
+}
+print("Writing table...")
+write.table(all,file=outputfile,sep="\t",row.names = F,quote = F)
 
-upset(df,sets.bar.color = "#2d3436",
-      sets = c("GRIP","CIMS-miCLIP","CITS-miCLIP","m6Am-miCLIP"),
+print("Making UpSet Plot...")
+colnames(all) <- c("chr","start","end","GRIP-seq","CIMS-miCLIP","CITS-miCLIP","m6Am-miCLIP")
+
+pdf("UpSetPlot.pdf")
+upsetplot <- upset(all,sets.bar.color = "#2d3436",
+      sets = c("GRIP-seq","CIMS-miCLIP","CITS-miCLIP","m6Am-miCLIP"),
       sets.x.label = "Interactions Called",
-      queries = list(list(query = intersects, params = list("GRIP"), color = "#6c5ce7", active = T),
+      queries = list(list(query = intersects, params = list("GRIP-seq"), color = "#6c5ce7", active = T),
                      list(query = intersects, params = list("CIMS-miCLIP"), color = "#ff7675", active = T),
                      list(query = intersects, params = list("CITS-miCLIP"), color = "#fdcb6e", active = T),
                      list(query = intersects, params = list("m6Am-miCLIP"), color = "#00b894", active = T)
       ),
       
-      attribute.plots = list(gridrows = 100, plots = list(list(plot = histogram,x = "chr", queries = T),
-                                                         list(plot = scatter_plot, y = "chr",x = "start", queries = T)), ncols =1),
+      attribute.plots = list(gridrows = 100, plots = list(list(plot = scatter_plot, x = "chr",y = "start", queries = T)), ncols =1),
       query.legend = "bottom"
 )
-
-
-
+print(upsetplot)
+dev.off()
 
