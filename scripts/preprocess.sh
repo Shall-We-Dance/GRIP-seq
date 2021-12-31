@@ -32,9 +32,6 @@ mkdir -p ${ROOTDIR}/fastp/${ID}
 mkdir -p ${ROOTDIR}/cutadapt/${ID}
 mkdir -p ${ROOTDIR}/STAR/${ID}
 mkdir -p ${ROOTDIR}/find_peak/${ID}
-mkdir -p ${ROOTDIR}/upsetplot/${ID}
-mkdir -p ${ROOTDIR}/metaPlotR/${ID}
-
 
 echo "Preprocessing the fastq files..."
 
