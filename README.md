@@ -88,14 +88,12 @@ ${GENOME_DIR}/
   We will use an ID call `current` by defalut, to specify, run:
   
   ```
-  conda activate GRIP-seq
   bash scripts/preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID}
   ```
   
-  This script will run on 8 threads (CPU) by defalut, to specify, run:
+  This script will run on `8` threads (CPU) by defalut, to specify, run:
 
   ```
-  conda activate GRIP-seq
   bash scripts/preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID} ${THREAD}
   ```
   
