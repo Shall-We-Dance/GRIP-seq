@@ -77,7 +77,7 @@ ${GENOME_DIR}/
   ```
 ### 3.  Preprocess the raw data
 
-  **Specify the name of your repeats in `scripts/repeats.txt`**
+  **Specify the name of your repeats in `scripts/repeats.txt`.**
 
   ```
   #basic usage
@@ -98,6 +98,18 @@ ${GENOME_DIR}/
   ```
   bash scripts/preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID} ${THREAD}
   ```
+  
+### 4.  Clipper
+
+  ```
+  #basic usage
+  conda activate clipper3
+  bash scripts/clipper.sh ${ANALYSIS_DIR} 
+  ```
+  
+  This script will use the mapping result (STAR) to call peaks by clipper.
+  
+  
   
 ## Making UpSetPlot
 
