@@ -32,9 +32,6 @@ echo "Using CPU threads: ${THREAD} ..."
 mkdir -p ${ROOTDIR}/fastp/${ID}
 mkdir -p ${ROOTDIR}/cutadapt/${ID}
 mkdir -p ${ROOTDIR}/STAR/${ID}
-mkdir -p ${ROOTDIR}/bigWig/${ID}
-mkdir -p ${ROOTDIR}/macs2/${ID}
-mkdir -p ${ROOTDIR}/output/${ID}
 mkdir -p ${ROOTDIR}/find_peak/${ID}
 mkdir -p ${ROOTDIR}/upsetplot/${ID}
 mkdir -p ${ROOTDIR}/metaPlotR/${ID}
