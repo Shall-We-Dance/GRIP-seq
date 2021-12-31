@@ -77,6 +77,8 @@ ${GENOME_DIR}/
   ```
 ### 3.  Preprocess the raw data
 
+  **Specify the name of your repeats in `scripts/repeats.txt`**
+
   ```
   #basic usage
   conda activate GRIP-seq
