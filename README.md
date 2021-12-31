@@ -111,6 +111,18 @@ ${GENOME_DIR}/
   
   **📒NOTE: This is not the final peak results. **
   
+  We will use an ID call `current` by defalut, to specify, run:
+  
+  ```
+  bash scripts/clipper.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID}
+  ```
+  
+  This script will run on `8` threads (CPU) by defalut, to specify, run:
+
+  ```
+  bash scripts/clipper.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID} ${THREAD}
+  ```
+  
 ## Making UpSetPlot
 
 Using [UpSetR](https://github.com/hms-dbmi/UpSetR).
