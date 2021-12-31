@@ -54,8 +54,6 @@ fastp -i ${ROOTDIR}/fastp/${ID}/${NAME}_R1_length.fastq.gz \
 -h ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_dedup_adapter.html \
 -j ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_dedup_adapter.json \
 --thread ${THREAD} \
---length_required 40 \
---length_limit 40 \
 --dedup
 
 #cutadapt
