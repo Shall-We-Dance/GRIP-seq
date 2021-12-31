@@ -29,7 +29,7 @@ echo "Preparing data form clipper..."
 for NAME in ${REPEAT};
 do
 echo "Preparing data form clipper for ${NAME}..."
-zcat ${ROOTDIR}/clipper/${ID}/${NAME}.peak.bed.gz | awk -F"\t" '{if ($6=="+") print $1"\t"$2"\t"$2+1"\t"$4"\t"$5"\t"$6; else print $1"\t"$3-1"\t"$3"\t"$4"\t"$5"\t"$6}' > ${ROOTDIR}/clipper/${ID}/${NAME}.summit.bed
+cat ${ROOTDIR}/clipper/${ID}/${NAME}.peak.bed | awk -F"\t" '{if ($6=="+") print $1"\t"$2"\t"$2+1"\t"$4"\t"$5"\t"$6; else print $1"\t"$3-1"\t"$3"\t"$4"\t"$5"\t"$6}' > ${ROOTDIR}/clipper/${ID}/${NAME}.summit.bed
 done
 
 echo "Calculating mapping depth..."
