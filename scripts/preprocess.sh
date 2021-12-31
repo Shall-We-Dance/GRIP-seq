@@ -76,8 +76,6 @@ STAR  --runThreadN ${THREAD} \
 --outSAMtype BAM SortedByCoordinate ;
 done
 
-#samtools_index_bigwig
-
 echo "Indexing and calculating depth..."
 for NAME in ${REPEAT};
 do
