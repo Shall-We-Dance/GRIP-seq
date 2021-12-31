@@ -88,5 +88,5 @@ do
 samtools index -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam;
 samtools depth -l 10 ${ROOTDIR}/find_peak/${NAME}.bamAligned.sortedByCoord.out.bam > ${ROOTDIR}/find_peak/${NAME}.10.coverage
 done
-
+echo "Finished!"
 exit 0
