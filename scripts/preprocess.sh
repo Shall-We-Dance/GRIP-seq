@@ -31,7 +31,6 @@ echo "Using CPU threads: ${THREAD} ..."
 mkdir -p ${ROOTDIR}/fastp/${ID}
 mkdir -p ${ROOTDIR}/cutadapt/${ID}
 mkdir -p ${ROOTDIR}/STAR/${ID}
-mkdir -p ${ROOTDIR}/find_peak/${ID}
 
 echo "Preprocessing the fastq files..."
 
