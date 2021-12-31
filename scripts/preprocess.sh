@@ -2,7 +2,6 @@
 
 #Preprocess
 
-#STAR_Generate
 #GRIP-seq pipeline
 #Author: Hongijang Liu
 #Email: hongjiang.liu@ucsf.edu
