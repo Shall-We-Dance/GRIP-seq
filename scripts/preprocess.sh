@@ -37,6 +37,7 @@ echo "Preprocessing the fastq files..."
 for NAME in ${REPEAT};
 do
 #fastp
+echo "Preprocessing the fastq files for ${NAME}..."
 fastp -i ${ROOTDIR}/raw_data/${NAME}_L003_R1_001.fastq.gz \
 -I ${ROOTDIR}/raw_data/${NAME}_L003_R2_001.fastq.gz \
 -o ${ROOTDIR}/fastp/${ID}/${NAME}_R1_length.fastq.gz \
@@ -66,6 +67,7 @@ echo "Mapping..."
 ulimit -n 65535
 for NAME in ${REPEAT};
 do
+echo "Mapping for ${NAME}..."
 STAR  --runThreadN ${THREAD} \
 --genomeDir  ${GENOMEDIR_STAR} \
 --readFilesCommand zcat \
