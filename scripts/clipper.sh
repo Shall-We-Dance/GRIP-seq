@@ -18,7 +18,7 @@ REPEAT=$(cat ./repeat.txt)
 
 ROOTDIR="$1"
 ID=${2:-"current"}  # Default ID is current
-
+THREAD=${3:-"8"}  # Default using 8 threads
 
 echo "ROOTDIR: ${ROOTDIR} ..."
 echo "ID: ${ID} ..."
@@ -31,7 +31,7 @@ for NAME in ${REPEAT};
 do 
 clipper -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam \
 -s hg19 \
---processors \
+--processors ${THREAD} \
 -o ${ROOTDIR}/clipper/${ID}/${NAME}.peak.bed \
 --FDR 0.01 --poisson-cutoff 1e-10 --minreads 5 --binomial 0.01
 done
