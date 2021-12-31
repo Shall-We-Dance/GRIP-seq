@@ -2,6 +2,8 @@
 
 #STAR_Generate
 #GRIP-seq pipeline
+#Author: Hongijang Liu
+#Email: hongjiang.liu@ucsf.edu
 
 # Exit the script if an error happens
 set -e
