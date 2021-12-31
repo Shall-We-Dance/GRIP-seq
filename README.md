@@ -75,9 +75,30 @@ ${GENOME_DIR}/
   #specify CPU threads & index length
   bash scripts/generate_genome_index.sh ${GENOME_DIR} ${CPU_THREADS} ${INDEX_LENGTH}
   ```
+### 3.  Preprocess the raw data
 
+  ```
+  #basic usage
+  conda activate GRIP-seq
+  bash scripts/preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR}
+  ```
 
+  This script will process the fastq files by fastp and cutadapt. Then mapping reads to genome using STAR.
+  
+  We will use an ID call `current` by defalut, to specify, run:
+  
+  ```
+  conda activate GRIP-seq
+  bash scripts/preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID}
+  ```
+  
+  This script will run on 8 threads (CPU) by defalut, to specify, run:
 
+  ```
+  conda activate GRIP-seq
+  bash scripts/preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID} ${THREAD}
+  ```
+  
 ## Making UpSetPlot
 
 Using [UpSetR](https://github.com/hms-dbmi/UpSetR).
