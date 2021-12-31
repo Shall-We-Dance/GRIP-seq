@@ -114,13 +114,13 @@ ${GENOME_DIR}/
   We will use an ID call `current` by defalut, to specify, run:
   
   ```
-  bash scripts/clipper.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID}
+  bash scripts/clipper.sh ${ANALYSIS_DIR} ${ID}
   ```
   
   This script will run on `8` threads (CPU) by defalut, to specify, run:
 
   ```
-  bash scripts/clipper.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID} ${THREAD}
+  bash scripts/clipper.sh ${ANALYSIS_DIR} ${ID} ${THREAD}
   ```
   
 ## Making UpSetPlot
