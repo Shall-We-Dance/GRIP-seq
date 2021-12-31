@@ -37,7 +37,7 @@ echo "Calling peaks..."
 for NAME in ${REPEAT};
 do
 echo "Calling peaks for ${NAME}..."
-Rscript ../peaks/peak.R \
+Rscript ../peaks/peaks.R \
 ${ROOTDIR}/clipper/${ID}/${NAME}.summit.bed \
 ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.10.coverage \
 1.4 \
