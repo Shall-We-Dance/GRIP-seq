@@ -30,7 +30,7 @@ mkdir -p ${ROOTDIR}/clipper/${ID}
 echo "Running clipper..."
 for NAME in ${REPEAT}; 
 do 
-clipper -b ${ROOTDIR}/STAR/${INID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam \
+clipper -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam \
 -s hg19 \
 -o ${ROOTDIR}/clipper/${ID}/${NAME}.peak.bed \
 --FDR 0.01 --poisson-cutoff 1e-10 --minreads 5 --binomial 0.01
