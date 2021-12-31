@@ -128,6 +128,30 @@ ${GENOME_DIR}/
   bash scripts/clipper.sh ${ANALYSIS_DIR} ${ID} ${THREAD}
   ```
   
+### 5.  Call peaks
+
+  ```
+  #basic usage
+  conda activate GRIP-seq
+  bash scripts/GRIP_peak.sh ${ANALYSIS_DIR} 
+  ```
+  
+  This script will use the mapping result (STAR) to call peaks by clipper.
+  
+  
+  We will use an ID call `current` by defalut, to specify, run:
+  
+  ```
+  bash scripts/GRIP_peak.sh ${ANALYSIS_DIR} ${ID}
+  ```
+  
+  This script will run on `8` threads (CPU) by defalut, to specify, run:
+
+  ```
+  bash scripts/GRIP_peak.sh ${ANALYSIS_DIR} ${ID} ${THREAD}
+  ```
+  
+  
 ## Making UpSetPlot
 
 Using [UpSetR](https://github.com/hms-dbmi/UpSetR).
