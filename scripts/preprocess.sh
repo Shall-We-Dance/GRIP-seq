@@ -82,7 +82,7 @@ echo "Indexing and calculating depth..."
 for NAME in ${REPEAT};
 do
 samtools index -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam;
-samtools depth -l 10 ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam > ${ROOTDIR}/find_peak/${NAME}.10.coverage
+samtools depth -l 10 ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam > ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.10.coverage
 done
 echo "Finished!"
 exit 0
