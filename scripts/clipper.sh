@@ -17,11 +17,9 @@ fi
 REPEAT=$(cat ./repeat.txt)
 
 ROOTDIR="$1"
-GENOMEDIR_STAR="$2"
 ID=${3:-"current"}  # Default ID is current
 
 echo "ROOTDIR: ${ROOTDIR} ..."
-echo "GENOMEDIR_STAR: ${GENOMEDIR_STAR} ..."
 echo "ID: ${ID} ..."
 
 echo "Making dir for clipper..."
