@@ -81,7 +81,7 @@ for NAME in ${REPEAT};
 do
 samtools index -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam;
 samtools depth ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.bam > ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.coverage
-cat ${ROOTDIR}/STAR/${ID}/${NAME}.coverage | awk '$3 > 10 {print $0}' > ${ROOTDIR}/STAR/${ID}/${NAME}.positive.10.coverage
+cat ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.coverage | awk '$3 > 10 {print $0}' > ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.positive.10.coverage
 done
 echo "Finished!"
 exit 0
