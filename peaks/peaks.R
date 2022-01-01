@@ -23,10 +23,10 @@ colnames(ref) <- c("chr","postion","depth")
 prepeaks <- raw[0,]
 peaks <- raw[0,]
 temp <- raw
-p1 <- progress_bar$new(total = nrow(temp))
+p1 <- progress_bar$new(format = "[:bar] :current/:total (:percent)", total = nrow(temp))
 print("Initializing...")
 for(i in 1:nrow(temp)){
-  p1$tick()
+  p1$tick(1)
   if (temp[i,6] == '-'){
     temp[i,7] <- temp[i,3] - 3
     temp[i,8] <- temp[i,3] - 8
@@ -49,19 +49,19 @@ temp <- left_join(temp,ref,by=c("chr","low8"="postion"))
 
 temp[is.na(temp)] <- 5
 
-p2 <- progress_bar$new(total = nrow(temp))
+p2 <- progress_bar$new(format = "[:bar] :current/:total (:percent)", total = nrow(temp))
 print("Finding peaks (1st trun)...")
 for(i in 1:nrow(temp)){
-  p2$tick()
+  p2$tick(1)
   if (temp[i,11] / temp[i,13] > threshhold | temp[i,11] / temp[i,14] > threshhold | temp[i,12] / temp[i,13] > threshhold | temp[i,12] / temp[i,14] > threshhold){
     prepeaks <- bind_rows(prepeaks,temp[i,1:6])
   }
 }
 
-p3 <- progress_bar$new(total = nrow(prepeaks))
+p3 <- progress_bar$new(format = "[:bar] :current/:total (:percent)", total = nrow(prepeaks))
 print("Successed, starting the 2nd turn...")
 for(i in 1:nrow(prepeaks)){
-  p3$tick()
+  p3$tick(1)
   if (prepeaks[i,6] == '-'){
     prepeaks[i,7:22] <- (prepeaks[i,3] - 8):(prepeaks[i,3] + 7)
   }
@@ -72,47 +72,30 @@ for(i in 1:nrow(prepeaks)){
 
 colnames(prepeaks) <- c("chr","start","end","name","pval","strain","p1","p2","p3","p4","p5","p6","p7","p8","p9","p10","p11","p12","p13","p14","p15","p16")
 print("Finding depth...")
-p5 <- progress_bar$new(total = 16)
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p1"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p2"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p3"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p4"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p5"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p6"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p7"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p8"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p9"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p10"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p11"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p12"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p13"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p14"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p15"="postion"))
-p5$tick()
 prepeaks <- left_join(prepeaks,ref,by=c("chr","p16"="postion"))
-p5$tick()
 
 prepeaks[is.na(prepeaks)] <- 5
 
-p4 <- progress_bar$new(total = nrow(prepeaks))
+p4 <- progress_bar$new(format = "[:bar] :current/:total (:percent)", total = nrow(prepeaks))
 print("Finding peaks (2nd trun)...")
 # To find out the biggest different point
 for(i in 1:nrow(prepeaks)){
-  p4$tick()
+  p4$tick(1)
   high_value <- 0
   for(j in 23:37){
     if(prepeaks[i,j] / prepeaks[i,j+1] > high_value){
