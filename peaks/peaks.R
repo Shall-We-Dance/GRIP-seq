@@ -97,20 +97,26 @@ print("Finding peaks (2nd trun)...")
 for(i in 1:nrow(prepeaks)){
   p4$tick(1)
   high_value <- 0
+  x_high <- -1
   for(j in 23:37){
     if(prepeaks[i,j] - prepeaks[i,j+1] > high_value & prepeaks[i,j] / prepeaks[i,j+1] > threshhold){
       high_value <- prepeaks[i,j] - prepeaks[i,j+1]
       x_high <- j
     }
   }
-  if(prepeaks[i,6] == "-"){
-    temp_peak <- data.frame(prepeaks[i,1],(prepeaks[i,x_high-16]-1),(prepeaks[i,x_high+1-16]-1),prepeaks[i,4],prepeaks[i,5],prepeaks[i,6])
+  if(x_high == -1){
+    break
   }
-  if(prepeaks[i,6] == "+"){
-    temp_peak <- data.frame(prepeaks[i,1],prepeaks[i,x_high+1-16],prepeaks[i,x_high-16],prepeaks[i,4],prepeaks[i,5],prepeaks[i,6])
+  else{
+    if(prepeaks[i,6] == "-"){
+      temp_peak <- data.frame(prepeaks[i,1],(prepeaks[i,x_high-16]-1),(prepeaks[i,x_high+1-16]-1),prepeaks[i,4],prepeaks[i,5],prepeaks[i,6])
+    }
+    if(prepeaks[i,6] == "+"){
+      temp_peak <- data.frame(prepeaks[i,1],prepeaks[i,x_high+1-16],prepeaks[i,x_high-16],prepeaks[i,4],prepeaks[i,5],prepeaks[i,6])
+    }
+    colnames(temp_peak) <- c("chr","start","end","name","pval","strain")
+    peaks <- bind_rows(peaks,temp_peak)
   }
-  colnames(temp_peak) <- c("chr","start","end","name","pval","strain")
-  peaks <- bind_rows(peaks,temp_peak)
 }
 
 print("Successed...")
