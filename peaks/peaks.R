@@ -99,7 +99,7 @@ for(i in 1:nrow(prepeaks)){
   high_value <- 0
   x_high <- -1
   for(j in 23:37){
-    if(prepeaks[i,j] - prepeaks[i,j+1] > high_value & prepeaks[i,j] / prepeaks[i,j+1] > threshhold){
+    if((prepeaks[i,j] - prepeaks[i,j+1] > high_value) & (prepeaks[i,j] / prepeaks[i,j+1] > threshhold)){
       high_value <- prepeaks[i,j] - prepeaks[i,j+1]
       x_high <- j
     }
