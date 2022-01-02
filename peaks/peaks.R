@@ -98,7 +98,7 @@ for(i in 1:nrow(prepeaks)){
   p4$tick(1)
   high_value <- 0
   for(j in 23:37){
-    if(prepeaks[i,j] - prepeaks[i,j+1] > high_value){
+    if(prepeaks[i,j] - prepeaks[i,j+1] > high_value & prepeaks[i,j] / prepeaks[i,j+1] > threshhold*0.9){
       high_value <- prepeaks[i,j] - prepeaks[i,j+1]
       x_high <- j
     }
