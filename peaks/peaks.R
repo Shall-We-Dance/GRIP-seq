@@ -13,7 +13,6 @@ args <- commandArgs(trailingOnly=TRUE)
 raw_input <- args[1]
 ref_input <- args[2]
 threshhold <- args[3]
-threshhold_peak <- threshhold*0.9
 output_file_name <- args[4]
 
 raw <- read.table(raw_input,header=F)
@@ -99,7 +98,7 @@ for(i in 1:nrow(prepeaks)){
   p4$tick(1)
   high_value <- 0
   for(j in 23:37){
-    if(prepeaks[i,j] - prepeaks[i,j+1] > high_value & prepeaks[i,j] / prepeaks[i,j+1] > threshhold_peak){
+    if(prepeaks[i,j] - prepeaks[i,j+1] > high_value & prepeaks[i,j] / prepeaks[i,j+1] > threshhold){
       high_value <- prepeaks[i,j] - prepeaks[i,j+1]
       x_high <- j
     }
