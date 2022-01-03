@@ -9,21 +9,34 @@ library(ggplot2)
 library("UpSetR")
 library(progress)
 
-setwd(".")
-GRIP <- read.table("bed/all.1.4.2.GRIP.sorted.merged.bed",header=F)
-CIMS <- read.table("bed/CIMS-miCLIP.bed",header=F)
-CITS <- read.table("bed/CITS-miCLIP.bed",header=F)
-m6Am <- read.table("bed/miCLIP-m6Am.bed",header=F)
-all <- read.table("bed/all.1.4.2.sorted.merged.bed",header=F)
-outputfile <-"all.1.4.2.csv"
+#import data
+print("Loading...")
+args <- commandArgs(trailingOnly=TRUE)
+GRIP_input <- args[1]
+CIMS_input <- args[2]
+CITS_input <- args[3]
+m6Am_input <- args[4]
+all_input <- args[5]
+outputfile <- args[6]
+outputpdf <- args[7]
+#GRIP <- read.table("bed/all.GRIP.merged.bed",header=F)
+#CIMS <- read.table("bed/CIMS-miCLIP.bed",header=F)
+#CITS <- read.table("bed/CITS-miCLIP.bed",header=F)
+#m6Am <- read.table("bed/miCLIP-m6Am.bed",header=F)
+#all <- read.table("bed/all.merged.bed",header=F)
+#outputfile <- "all.csv"
+#outputpdf <- "upsetplot.pdf"
+
+GRIP <- read.table(GRIP_input,header=F)
+CIMS <- read.table(CIMS_input,header=F)
+CITS <- read.table(CITS_input,header=F)
+m6Am <- read.table(m6Am_input,header=F)
+all <- read.table(all_input,header=F)
 all[,4:7]=0
 colnames(all) <- c("chr","start","end","GRIP","CIMS","CITS","m6Am")
 
-#初始化
 xrow=1
-#断点续跑
-#load("UpSet.Rdata")
-p1 <- progress_bar$new(total = nrow(all))
+p1 <- progress_bar$new(format = "[:bar] :current/:total (:percent)", total = nrow(all))
 print("Making one-hot table...")
 for(i in xrow:nrow(all)){
   p1$tick()
@@ -37,6 +50,8 @@ for(i in xrow:nrow(all)){
       all[i,4]=1
       break
     }
+    else{
+    }
   }
   for(j in 1:nrow(f_CIMS)){
     if(f_CIMS[j,2]>=all[i,2] & f_CIMS[j,3]<=all[i,3]){
@@ -45,35 +60,24 @@ for(i in xrow:nrow(all)){
     }
   }
   if(nrow(f_CITS) > 0){
-  for(j in 1:nrow(f_CITS)){
-    if(f_CITS[j,2]>=all[i,2] & f_CITS[j,3]<=all[i,3]){
-      all[i,6]=1
-      break
+    for(j in 1:nrow(f_CITS)){
+      if(f_CITS[j,2]>=all[i,2] & f_CITS[j,3]<=all[i,3]){
+        all[i,6]=1
+        break
+      }
     }
-  }}
+  }
   if(nrow(f_m6Am) > 0){
-  for(j in 1:nrow(f_m6Am)){
-    if(f_m6Am[j,2]>=all[i,2] & f_m6Am[j,3]<=all[i,3]){
-      all[i,7]=1
-      break
+    for(j in 1:nrow(f_m6Am)){
+      if(f_m6Am[j,2]>=all[i,2] & f_m6Am[j,3]<=all[i,3]){
+        all[i,7]=1
+        break
+      }
     }
-  }}
-  
-#  if(i%%500 == 0)
-#  {
-#    xrow = i
-#    save(all,xrow, file="UpSet.Rdata")
-#    write.table(all,file=outputfile,sep="\t",row.names = F,quote = F)
-#  }
-#  if(i%%nrow(all) == 0)
-#  {
-#    xrow = i
-#    save(all,xrow, file="1.6.UpSet.Rdata")
-#    write.table(all,file=outputfile,sep="\t",row.names = F,quote = F)
-#  }
+  }
 }
 
-p2 <- progress_bar$new(total = nrow(all))
+p2 <- progress_bar$new(format = "[:bar] :current/:total (:percent)", total = nrow(all))
 print("Converting...")
 for(k in 1:nrow(all)){
   p2$tick()
@@ -160,7 +164,7 @@ write.table(all,file=outputfile,sep="\t",row.names = F,quote = F)
 print("Making UpSet Plot...")
 colnames(all) <- c("chr","start","end","GRIP-seq","CIMS-miCLIP","CITS-miCLIP","m6Am-miCLIP")
 
-pdf("UpSetPlot.pdf")
+pdf(outputpdf)
 upsetplot <- upset(all,sets.bar.color = "#2d3436",
       sets = c("GRIP-seq","CIMS-miCLIP","CITS-miCLIP","m6Am-miCLIP"),
       sets.x.label = "Interactions Called",
@@ -168,10 +172,9 @@ upsetplot <- upset(all,sets.bar.color = "#2d3436",
                      list(query = intersects, params = list("CIMS-miCLIP"), color = "#ff7675", active = T),
                      list(query = intersects, params = list("CITS-miCLIP"), color = "#fdcb6e", active = T),
                      list(query = intersects, params = list("m6Am-miCLIP"), color = "#00b894", active = T)
-      ),
-      
-      attribute.plots = list(gridrows = 100, plots = list(list(plot = scatter_plot, x = "chr",y = "start", queries = T)), ncols =1),
-      query.legend = "bottom"
+      )#,
+      #attribute.plots = list(gridrows = 100, plots = list(list(plot = scatter_plot, x = "chr",y = "start", queries = T)), ncols =1),
+      #query.legend = "bottom"
 )
 print(upsetplot)
 dev.off()
