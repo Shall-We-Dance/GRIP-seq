@@ -50,8 +50,6 @@ for(i in xrow:nrow(all)){
       all[i,4]=1
       break
     }
-    else{
-    }
   }
   for(j in 1:nrow(f_CIMS)){
     if(f_CIMS[j,2]>=all[i,2] & f_CIMS[j,3]<=all[i,3]){
