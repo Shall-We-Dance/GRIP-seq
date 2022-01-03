@@ -63,7 +63,8 @@ ${GENOME_DIR}/
 
   ```
   #basic usage
-  bash scripts/generate_genome_index.sh ${GENOME_DIR}
+  cd scripts
+  bash generate_genome_index.sh ${GENOME_DIR}
   ```
   This will generate a hg19 genome index using defalut settings, which uses `--sjdbOverhang=100` and runs on 8 threads.
   
@@ -71,14 +72,14 @@ ${GENOME_DIR}/
   
   ```
   #specify CPU threads
-  bash scripts/generate_genome_index.sh ${GENOME_DIR} ${CPU_THREADS}
+  bash generate_genome_index.sh ${GENOME_DIR} ${CPU_THREADS}
   ```
   
   The ideal value of `--sjdbOverhang` is `max(ReadLength)-1`, to specify, run:
   
   ```
   #specify CPU threads & index length
-  bash scripts/generate_genome_index.sh ${GENOME_DIR} ${CPU_THREADS} ${INDEX_LENGTH}
+  bash generate_genome_index.sh ${GENOME_DIR} ${CPU_THREADS} ${INDEX_LENGTH}
   ```
 ### 3.  Preprocess the raw data
 
@@ -87,7 +88,8 @@ ${GENOME_DIR}/
   ```
   #basic usage
   conda activate GRIP-seq
-  bash scripts/preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR}
+  cd scripts
+  bash preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR}
   ```
 
   This script will process the fastq files by fastp and cutadapt. Then mapping reads to genome using STAR.
@@ -95,13 +97,13 @@ ${GENOME_DIR}/
   We will use an ID call `current` by defalut, to specify, run:
   
   ```
-  bash scripts/preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID}
+  bash preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID}
   ```
   
   This script will run on `8` threads (CPU) by defalut, to specify, run:
 
   ```
-  bash scripts/preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID} ${THREAD}
+  bash preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID} ${THREAD}
   ```
   
 ### 4.  Clipper
@@ -109,7 +111,8 @@ ${GENOME_DIR}/
   ```
   #basic usage
   conda activate clipper3
-  bash scripts/clipper.sh ${ANALYSIS_DIR} 
+  cd scripts
+  bash clipper.sh ${ANALYSIS_DIR} 
   ```
   
   This script will use the mapping result (STAR) to call peaks by clipper.
@@ -119,13 +122,13 @@ ${GENOME_DIR}/
   We will use an ID call `current` by defalut, to specify, run:
   
   ```
-  bash scripts/clipper.sh ${ANALYSIS_DIR} ${ID}
+  bash clipper.sh ${ANALYSIS_DIR} ${ID}
   ```
   
   This script will run on `8` threads (CPU) by defalut, to specify, run:
 
   ```
-  bash scripts/clipper.sh ${ANALYSIS_DIR} ${ID} ${THREAD}
+  bash clipper.sh ${ANALYSIS_DIR} ${ID} ${THREAD}
   ```
   
 ### 5.  Call peaks
@@ -133,7 +136,8 @@ ${GENOME_DIR}/
   ```
   #basic usage
   conda activate GRIP-seq
-  bash scripts/GRIP_peak.sh ${ANALYSIS_DIR} 
+  cd scripts
+  bash GRIP_peak.sh ${ANALYSIS_DIR} 
   ```
   
   This script will use the mapping result (STAR) to call peaks by clipper.
@@ -142,13 +146,13 @@ ${GENOME_DIR}/
   We will use an ID call `current` by defalut, to specify, run:
   
   ```
-  bash scripts/GRIP_peak.sh ${ANALYSIS_DIR} ${ID}
+  bash GRIP_peak.sh ${ANALYSIS_DIR} ${ID}
   ```
   
   This script will run on `8` threads (CPU) by defalut, to specify, run:
 
   ```
-  bash scripts/GRIP_peak.sh ${ANALYSIS_DIR} ${ID} ${THREAD}
+  bash GRIP_peak.sh ${ANALYSIS_DIR} ${ID} ${THREAD}
   ```
   
   
