@@ -6,9 +6,6 @@
 #Author: Hongijang Liu
 #Email: hongjiang.liu@ucsf.edu
 
-# Exit the script if an error happens
-set -e
-
 if [[ $# -eq 0 ]]; then
   echo "Error: ROOTDIR & GENOMEDIR must be provided as an input argument."
   exit 1
