@@ -139,3 +139,5 @@ df <- data.frame(metagene.cord, mod)
 
 ggplot(df) + geom_density(aes(x = metagene.cord, colour = mod)) + xlim(0, 3) + 
   theme_bw() + geom_vline(xintercept = 1:2, col = "grey")
+
+ggsave(pout, file=OUT,width=16,height=12)
