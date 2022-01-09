@@ -137,7 +137,7 @@ mod <- c(rep("YTH-WT", length(m6a1.metagene.coord)),
         rep("YTH-397SFY_3", length(m6a4.metagene.coord))) 
 df <- data.frame(metagene.cord, mod)
 
-ggplot(df) + geom_density(aes(x = metagene.cord, colour = mod)) + xlim(0, 3) + 
+pout <- ggplot(df) + geom_density(aes(x = metagene.cord, colour = mod)) + xlim(0, 3) + 
   theme_bw() + geom_vline(xintercept = 1:2, col = "grey")
 
 ggsave(pout, file=OUT,width=16,height=12)
