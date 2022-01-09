@@ -133,7 +133,7 @@ m6a4.metagene.coord <- c(utr5.m6a.dist$rel_location, cds.m6a.dist$rel_location, 
 metagene.cord <- c(m6a1.metagene.coord, m6a2.metagene.coord, m6a3.metagene.coord, m6a4.metagene.coord)
 mod <- c(rep("YTH-WT", length(m6a1.metagene.coord)), 
         rep("YTH-397SFY_1", length(m6a2.metagene.coord)),
-        rep("YTH-397SFY_2", length(m6a3.metagene.coord))
+        rep("YTH-397SFY_2", length(m6a3.metagene.coord)),
         rep("YTH-397SFY_3", length(m6a4.metagene.coord))) 
 df <- data.frame(metagene.cord, mod)
 
