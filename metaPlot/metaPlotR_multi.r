@@ -131,13 +131,13 @@ m6a4.metagene.coord <- c(utr5.m6a.dist$rel_location, cds.m6a.dist$rel_location, 
 
 
 metagene.cord <- c(m6a1.metagene.coord, m6a2.metagene.coord, m6a3.metagene.coord, m6a4.metagene.coord)
-repeats <- c(rep("YTH-WT", length(m6a1.metagene.coord)), 
-        rep("YTH-397SFY_1", length(m6a2.metagene.coord)),
-        rep("YTH-397SFY_2", length(m6a3.metagene.coord)),
-        rep("YTH-397SFY_3", length(m6a4.metagene.coord))) 
+repeats <- c(rep("YTH-WT", length(m6a1.metagene.coord)),
+             rep("YTH-397SFY_1", length(m6a2.metagene.coord)),
+             rep("YTH-397SFY_2", length(m6a3.metagene.coord)),
+             rep("YTH-397SFY_3", length(m6a4.metagene.coord))) 
 df <- data.frame(metagene.cord, repeats)
 
-pout <- ggplot(df) + geom_density(aes(x = metagene.cord, color = repeats, fill = repeats), alpha = 0.25, size = 2) + xlim(0, 3) + 
-  theme_bw() + geom_vline(xintercept = 1:2, col = "grey") + theme(legend.position = "top")
+pout <- ggplot(df) + geom_density(aes(x = metagene.cord, color = repeats, fill = repeats), alpha = 0.25, size = 1) + xlim(0, 3) + 
+  theme_classic() + geom_vline(xintercept = 1:2, size = 1,col = "black",alpha = 0.5, linetype = 2) + theme(legend.position = "top")
 
 ggsave(pout, file=OUT,width=8,height=6)
