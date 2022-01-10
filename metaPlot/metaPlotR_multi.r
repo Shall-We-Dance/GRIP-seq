@@ -135,7 +135,7 @@ repeats <- c(rep("YTH-WT", length(m6a1.metagene.coord)),
         rep("YTH-397SFY_1", length(m6a2.metagene.coord)),
         rep("YTH-397SFY_2", length(m6a3.metagene.coord)),
         rep("YTH-397SFY_3", length(m6a4.metagene.coord))) 
-df <- data.frame(metagene.cord, mod)
+df <- data.frame(metagene.cord, repeats)
 
 pout <- ggplot(df) + geom_density(aes(x = metagene.cord, color = repeats, fill = repeats), alpha = 0.4, size = 2) + xlim(0, 3) + 
   theme_bw() + geom_vline(xintercept = 1:2, col = "grey") + theme(legend.position = "top") + scale_color_brewer(set2)
