@@ -138,6 +138,6 @@ repeats <- c(rep("YTH-WT", length(m6a1.metagene.coord)),
 df <- data.frame(metagene.cord, repeats)
 
 pout <- ggplot(df) + geom_density(aes(x = metagene.cord, color = repeats, fill = repeats), alpha = 0.4, size = 2) + xlim(0, 3) + 
-  theme_bw() + geom_vline(xintercept = 1:2, col = "grey") + theme(legend.position = "top") + scale_color_brewer(set2)
+  theme_bw() + geom_vline(xintercept = 1:2, col = "grey") + theme(legend.position = "top") + scale_color_brewer("Set2")
 
 ggsave(pout, file=OUT,width=16,height=12)
