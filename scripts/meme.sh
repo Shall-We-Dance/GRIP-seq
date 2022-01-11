@@ -21,10 +21,17 @@ mkdir -p ${ROOTDIR}/meme
 for NAME in ${REPEAT}
 do 
 echo "Preparing for ${NAME}"
-cat ${ROOTDIR}/peak/${ID}/${NAME}.GRIP.peak.bed | awk -F"\t" '{print $1"\t"$2-5"\t"$3+5}' > ${ROOTDIR}/meme/${ID}/${NAME}.broad.bed
+cat ${ROOTDIR}/peak/${ID}/${NAME}.GRIP.peak.bed | awk -F"\t" '{if ($6=="-") print $1"\t"$2-10"\t"$3+10}' > ${ROOTDIR}/meme/${ID}/${NAME}.broad-.bed
+cat ${ROOTDIR}/peak/${ID}/${NAME}.GRIP.peak.bed | awk -F"\t" '{if ($6=="+") print $1"\t"$2-10"\t"$3+10}' > ${ROOTDIR}/meme/${ID}/${NAME}.broad+.bed
 bedtools getfasta -fi ${GENOMEDIR}/hg19/GRCh37.p13.genome.fa \
--bed ${ROOTDIR}/meme/${ID}/${NAME}.broad.bed \
--fo ${ROOTDIR}/meme/${ID}/${NAME}.broad.fa
-echo "Running MEME for ${NAME}"
-meme ${ROOTDIR}/meme/${ID}/${NAME}.broad.fa -dna -brief 1500000 -o  ${ROOTDIR}/meme/${NAME} -time 14400 -mod zoops -nmotifs 3 -minw 2 -maxw 50 -objfun classic  -markov_order 0
+-bed ${ROOTDIR}/meme/${ID}/${NAME}.broad-.bed \
+-fo ${ROOTDIR}/meme/${ID}/${NAME}.broad-.fa
+bedtools getfasta -fi ${GENOMEDIR}/hg19/GRCh37.p13.genome.fa \
+-bed ${ROOTDIR}/meme/${ID}/${NAME}.broad+.bed \
+-fo ${ROOTDIR}/meme/${ID}/${NAME}.broad+.fa
+seqkit seq ${ROOTDIR}/meme/${ID}/${NAME}.broad-.fa -r -p -t dna> ${ROOTDIR}/meme/${ID}/${NAME}.broad-.r.fa
+cat ${ROOTDIR}/meme/${ID}/${NAME}.broad-.r.fa ${ROOTDIR}/meme/${ID}/${NAME}.broad+.fa > ${ROOTDIR}/meme/${ID}/${NAME}.broad.fa
+echo "Running meme for ${NAME}"
+meme ${ROOTDIR}/meme/${ID}/${NAME}.broad.fa -dna -brief 1500000 -o  ${ROOTDIR}/meme/${ID}/${NAME} -time 14400 -mod zoops -nmotifs 3 -minw 5 -maxw 7 -objfun classic  -markov_order 0 
+echo "meme finished for ${NAME}"
 done
