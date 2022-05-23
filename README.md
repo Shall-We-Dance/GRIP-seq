@@ -117,7 +117,7 @@ ${GENOME_DIR}/
   
   This script will use the mapping result (STAR) to call peaks by clipper.
   
-  **📒NOTE: This is not the final peak results. **
+  **⚠️NOTE: This is not the final peak results. **
   
   We will use an ID call `current` by defalut, to specify, run:
   
