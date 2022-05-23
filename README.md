@@ -155,9 +155,3 @@ ${GENOME_DIR}/
   bash GRIP_peak.sh ${ANALYSIS_DIR} ${ID} ${THREAD}
   ```
   
-  
-## Making UpSetPlot
-
-Using [UpSetR](https://github.com/hms-dbmi/UpSetR).
-
-To finish this step, please refer to `UpSetR` [folder](https://github.com/Shall-We-Dance/GRIP-seq/tree/main/UpSetR).
