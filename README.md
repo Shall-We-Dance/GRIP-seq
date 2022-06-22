@@ -92,7 +92,7 @@ ${GENOME_DIR}/
   bash preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR}
   ```
 
-  This script will process the fastq files by fastp and cutadapt. Then mapping reads to genome using STAR.
+  This script will process the fastq files by fastp. Then mapping reads to genome using STAR.
   
   We will use an ID call `current` by defalut, to specify, run:
   
