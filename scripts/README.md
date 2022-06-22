@@ -29,7 +29,6 @@
   
 ```
 mkdir -p ${ANALYSIS_DIR}/fastp/${ID}
-mkdir -p ${ANALYSIS_DIR}/cutadapt/${ID}
 mkdir -p ${ANALYSIS_DIR}/STAR/${ID}
 mkdir -p ${ANALYSIS_DIR}/bigWig/${ID}
 mkdir -p ${ANALYSIS_DIR}/clipper/${ID}
@@ -54,9 +53,6 @@ ${ANALYSIS_DIR}/
     fastp/
         ${ID}/
             #fastp is used to filter raw data
-    cutadapt/
-        ${ID}/
-            #cutadapt is used to cut random adapter
     STAR/
         ${ID}/
             #STAR is used to map reads
