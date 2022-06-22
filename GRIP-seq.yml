@@ -16,7 +16,6 @@ dependencies:
   - ca-certificates=2021.10.8=ha878542_0
   - cairo=1.16.0=ha00ac49_1009
   - curl=7.80.0=h2574ce0_0
-  - cutadapt=3.5=py39h38f01e4_0
   - cython=0.29.26=py39he80948d_0
   - dnaio=0.6.0=py39h38f01e4_0
   - fastp=0.23.2=h79da9fb_0
