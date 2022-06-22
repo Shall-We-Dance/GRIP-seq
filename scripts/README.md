@@ -89,25 +89,41 @@ conda activate GRIP-seq
 + **Remove PCR deduplication and cut adapter using [fastp](https://github.com/OpenGene/fastp).**
 
 ```
-fastp -i ${ROOTDIR}/raw_data/${ID}/${NAME}_R1.fastq.gz \
--I ${ROOTDIR}/raw_data/${ID}/${NAME}_R2.fastq.gz \
+
+## Read length filter
+
+fastp -i ${ROOTDIR}/raw_data/${NAME}_L003_R1_001.fastq.gz \
+-I ${ROOTDIR}/raw_data/${NAME}_L003_R2_001.fastq.gz \
+-o ${ROOTDIR}/fastp/${ID}/${NAME}_R1_length.fastq.gz \
+-O ${ROOTDIR}/fastp/${ID}/${NAME}_R2_length.fastq.gz \
+-h ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_length.html \
+-j ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_length.json \
+--thread ${THREAD} -Q -A \
+--length_required 101 \
+--length_limit 101
+
+## quality control and cut illumina adapters
+
+fastp -i ${ROOTDIR}/fastp/${ID}/${NAME}_R1_length.fastq.gz \
+-I ${ROOTDIR}/fastp/${ID}/${NAME}_R2_length.fastq.gz \
 -o ${ROOTDIR}/fastp/${ID}/${NAME}_R1_fastp_dedup_adapter.fastq.gz \
 -O ${ROOTDIR}/fastp/${ID}/${NAME}_R2_fastp_dedup_adapter.fastq.gz \
 -h ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_dedup_adapter.html \
 -j ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_dedup_adapter.json \
 --thread ${THREAD} \
 --dedup
-```
 
-+ **Cut adapter using [cutadapt](https://github.com/marcelm/cutadapt).**
+## cut GRIP-seq own adapters
 
-```
-cutadapt -j ${THREAD} \
--u 12 -u -10 \
--o ${ROOTDIR}/cutadapt/${ID}/${NAME}_R1_cutadapt_fastp_dedup_adapter.fastq.gz ${ROOTDIR}/fastp/${ID}/${NAME}_R1_fastp_dedup_adapter.fastq.gz;
-cutadapt -j ${THREAD} \
-u 10 -u -12 \
--o ${ROOTDIR}/cutadapt/${ID}/${NAME}_R2_cutadapt_fastp_dedup_adapter.fastq.gz ${ROOTDIR}/fastp/${ID}/${NAME}_R2_fastp_dedup_adapter.fastq.gz;
+fastp -i ${ROOTDIR}/fastp/${ID}/${NAME}_R1_fastp_dedup_adapter.fastq.gz \
+-I ${ROOTDIR}/fastp/${ID}/${NAME}_R2_fastp_dedup_adapter.fastq.gz \
+-o ${ROOTDIR}/fastp/${ID}/${NAME}_R1_fastp_final.fastq.gz \
+-O ${ROOTDIR}/fastp/${ID}/${NAME}_R2_astp_final.fastq.gz \
+-h ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_final.html \
+-j ${ROOTDIR}/fastp/${ID}/${NAME}_fastp_final.json \
+--thread ${THREAD} \
+-A \
+-f 12 -t 10 -F 10 -T 12
 ```
 
 + **Map reads using [STAR](https://github.com/alexdobin/STAR).**
@@ -121,7 +137,7 @@ STAR  --runThreadN ${CPU_THREADS} \
 --outSAMtype BAM SortedByCoordinate ;
 ```
 
-  If you meet the `File size limit exceeded(core dumped)` error, run command below to fix it.
+  If you meet the `File size limit exceeded(core dumped)` error, run command below to fix it. (This usually happens if `${CPU_THREADS} > 16`)
   ```
   ulimit -n 65535
   ```
