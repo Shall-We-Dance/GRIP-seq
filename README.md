@@ -6,6 +6,8 @@ Here is the repositories of our research article on *Nature Chemistry*, which in
 
 You can use the pipeline described below to analysis GRIP-seq data.
 
+See our raw sequencing data at NCBI SRA: [PRJNA797913](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA797913)
+
 ## Install
 
 1. Clone the package
