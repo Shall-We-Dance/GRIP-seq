@@ -2,7 +2,7 @@
 
 # GRIP-seq
 
-Here is the repositories of our research article on *Nature Chemistry*, which introduciong a new technique **GRIP-seq**.
+Here is the repositories of our research article on [***Nature Chemistry***](https://doi.org/10.1038/s41557-022-01038-4), which introduciong a new technique **GRIP-seq**.
 
 You can use the pipeline described below to analysis GRIP-seq data.
 
