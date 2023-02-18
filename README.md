@@ -157,7 +157,7 @@ ${GENOME_DIR}/
   bash GRIP_peak.sh ${ANALYSIS_DIR} ${ID} ${THREAD}
   ```
   
-# Citing this work
+## Citing this work
 
 If you use our code or data, please cite:
 
