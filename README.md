@@ -162,11 +162,19 @@ ${GENOME_DIR}/
 If you use our code or data, please cite:
 
 @article{sun2022genetically,
+
   author = {Sun, Wei and Wang, Nanxi and Liu, Hongjiang and Yu, Bingchen and Jin, Ling and Ren, Xingjie and Shen, Yin and Wang, Lei},
+  
   title = {Genetically encoded chemical crosslinking of RNA in vivo},
+  
   journal = {Nature Chemistry},
+  
   pages = {1--12},
+  
   year = {2022},
+  
   publisher = {Nature Publishing Group UK London},
+  
   doi = {10.1038/s41557-022-01038-4}
+  
 }
