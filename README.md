@@ -11,13 +11,13 @@ See our raw sequencing data at NCBI SRA: [PRJNA797913](https://www.ncbi.nlm.nih.
 ## Install
 
 1. Clone the package
-```
+```sh
 git clone https://github.com/Shall-We-Dance/GRIP-seq.git
 cd GRIP-seq
 ```
 
 2. Create conda environment using `GRIP-seq.yml`.
-```
+```sh
 # create conda environment for GRIP-seq
 conda env create -f GRIP-seq.yml
 
@@ -26,7 +26,7 @@ conda activate GRIP-seq
 ```
 
 3. Install [clipper](https://github.com/YeoLab/clipper).
-```
+```sh
 # to test
 conda activate clipper3
 clipper -h
@@ -44,7 +44,7 @@ clipper -h
 
   The directory structure should be like:
   
-```
+```sh
 ${TOOLS_DIR}/
     meme/
         #Using meme to find motif
@@ -63,7 +63,7 @@ ${GENOME_DIR}/
 
 ### 2.  Generate genome indexes for [STAR](https://github.com/alexdobin/STAR)
 
-  ```
+  ```sh
   #basic usage
   cd scripts
   bash generate_genome_index.sh ${GENOME_DIR}
@@ -87,7 +87,7 @@ ${GENOME_DIR}/
 
   **Specify the name of your repeats in `scripts/repeats.txt`.**
 
-  ```
+  ```sh
   #basic usage
   conda activate GRIP-seq
   cd scripts
@@ -98,19 +98,19 @@ ${GENOME_DIR}/
   
   We will use an ID call `current` by defalut, to specify, run:
   
-  ```
+  ```sh
   bash preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID}
   ```
   
   This script will run on `8` threads (CPU) by defalut, to specify, run:
 
-  ```
+  ```sh
   bash preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID} ${THREAD}
   ```
   
 ### 4.  Clipper
 
-  ```
+  ```sh
   #basic usage
   conda activate clipper3
   cd scripts
@@ -123,19 +123,19 @@ ${GENOME_DIR}/
   
   We will use an ID call `current` by defalut, to specify, run:
   
-  ```
+  ```sh
   bash clipper.sh ${ANALYSIS_DIR} ${ID}
   ```
   
   This script will run on `8` threads (CPU) by defalut, to specify, run:
 
-  ```
+  ```sh
   bash clipper.sh ${ANALYSIS_DIR} ${ID} ${THREAD}
   ```
   
 ### 5.  Call peaks
 
-  ```
+  ```sh
   #basic usage
   conda activate GRIP-seq
   cd scripts
@@ -147,13 +147,13 @@ ${GENOME_DIR}/
   
   We will use an ID call `current` by defalut, to specify, run:
   
-  ```
+  ```sh
   bash GRIP_peak.sh ${ANALYSIS_DIR} ${ID}
   ```
   
   This script will run on `8` threads (CPU) by defalut, to specify, run:
 
-  ```
+  ```sh
   bash GRIP_peak.sh ${ANALYSIS_DIR} ${ID} ${THREAD}
   ```
   
@@ -161,7 +161,7 @@ ${GENOME_DIR}/
 
 If you use our code or data, please cite:
 
-```
+```bibtex
 @article{sun2022genetically,
   author = {Sun, Wei and Wang, Nanxi and Liu, Hongjiang and Yu, Bingchen and Jin, Ling and Ren, Xingjie and Shen, Yin and Wang, Lei},
   title = {Genetically encoded chemical crosslinking of RNA in vivo},
