@@ -27,8 +27,8 @@ conda activate GRIP-seq
 
 3. Install [clipper](https://github.com/YeoLab/clipper).
 ```sh
-# create conda environment for clipper
-conda env create -f clipper.yml
+# create conda environment for clipper3
+conda env create -f clipper3.yml
 
 # to test
 conda activate clipper3
