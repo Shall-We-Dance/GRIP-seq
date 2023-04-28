@@ -1,6 +1,6 @@
-<!--![homepic](imgs/home.png)-->
-
 # GRIP-seq
+
+![pic](./GRIP-seq.png)
 
 Here is the repositories of our research article on [***Nature Chemistry***](https://doi.org/10.1038/s41557-022-01038-4), which introduciong a new technique **GRIP-seq**.
 
