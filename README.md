@@ -2,50 +2,50 @@
 
 ![pic](./GRIP-seq.png)
 
-Here is the repositories of our research article on [***Nature Chemistry***](https://doi.org/10.1038/s41557-022-01038-4), which introduciong a new technique **GRIP-seq**.
+Welcome to our research article published in [***Nature Chemistry***](https://doi.org/10.1038/s41557-022-01038-4), where we introduce an innovative technique called **GRIP-seq**. This groundbreaking method paves the way for in vivo identification of unknown N<sup>6</sup>-methyladenosine on RNA with **single-nucleotide resolution** throughout the transcriptome.
 
-You can use the pipeline described below to analysis GRIP-seq data.
+To facilitate the analysis of GRIP-seq data, we have outlined a comprehensive pipeline below. By following these steps, researchers can gain valuable insights from their GRIP-seq experiments.
 
-See our raw sequencing data at NCBI SRA: [PRJNA797913](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA797913)
+Additionally, for those interested in exploring further, our raw sequencing data is accessible on NCBI's Sequence Read Archive (SRA): [PRJNA797913](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA797913). Delve into the raw data to deepen your understanding and explore the intricacies of our research.
 
 ## Install
 
-1. Clone the package
+1. Clone the repository.
 ```sh
 git clone https://github.com/Shall-We-Dance/GRIP-seq.git
 cd GRIP-seq
 ```
 
-2. Create conda environment using `GRIP-seq.yml`.
+2. Create a new conda environment using `GRIP-seq.yml`.
 ```sh
-# create conda environment for GRIP-seq
+# create a new conda environment for GRIP-seq
 conda env create -f GRIP-seq.yml
 
-# activate conda evironment - GRIP-seq
+# activate the conda evironment - GRIP-seq
 conda activate GRIP-seq
 ```
 
 3. Install [clipper](https://github.com/YeoLab/clipper).
 ```sh
-# create conda environment for clipper3
+# create a conda environment for clipper3
 conda env create -f clipper3.yml
 
-# to test
+# for test
 conda activate clipper3
 clipper -h
 ```
 
 ## Pipeline
 
-### 1.  Make directories.
+### 1.  Create directories.
 
-+ Make a directory `ANALYSIS_DIR` for this analysis, put your raw data at `ANALYSIS_DIR/raw_data` folder. 
++ Create a directory named `ANALYSIS_DIR` for this analysis, and place your raw data in the `ANALYSIS_DIR/raw_data` folder. 
 
-+ Make a directory `GENOME_DIR` for [STAR](https://github.com/alexdobin/STAR) to generate genome index. 
++ Create a directory named `GENOME_DIR` for [STAR](https://github.com/alexdobin/STAR) to generate the genome index. 
 
-+ Make a directory `TOOLS_DIR`, and install these 4 tools: [STAR](https://github.com/alexdobin/STAR), [meme](https://meme-suite.org/meme/doc/download.html), [clipper](https://github.com/YeoLab/clipper), [metaPlotR](https://github.com/olarerin/metaPlotR) . (STAR and meme could also be installed through conda)
++ Create a directory named `TOOLS_DIR`, and install the following four tools: [STAR](https://github.com/alexdobin/STAR), [meme](https://meme-suite.org/meme/doc/download.html), [clipper](https://github.com/YeoLab/clipper), [metaPlotR](https://github.com/olarerin/metaPlotR) . (Note: STAR and meme could also be installed using conda)
 
-  The directory structure should be like:
+  Please ensure the directory structure follows the format:
   
 ```sh
 ${TOOLS_DIR}/
@@ -64,16 +64,16 @@ ${GENOME_DIR}/
 
 ```
 
-### 2.  Generate genome indexes for [STAR](https://github.com/alexdobin/STAR)
+### 2.  Generate the genome indexes for [STAR](https://github.com/alexdobin/STAR)
 
   ```sh
   #basic usage
   cd scripts
   bash generate_genome_index.sh ${GENOME_DIR}
   ```
-  This will generate a hg19 genome index using defalut settings, which uses `--sjdbOverhang=100` and runs on 8 threads.
+  This command will generate an hg19 genome index using default settings, including `--sjdbOverhang=100` and utilizing 8 threads for processing.
   
-  To specify the threads used to generate, run:
+  To specify the number of threads used for generation, execute the following command:
   
   ```
   #specify CPU threads
@@ -88,7 +88,7 @@ ${GENOME_DIR}/
   ```
 ### 3.  Preprocess the raw data
 
-  **Specify the name of your repeats in `scripts/repeats.txt`.**
+  **Please specify the name of your repeats in `scripts/repeats.txt`.**
 
   ```sh
   #basic usage
@@ -97,9 +97,9 @@ ${GENOME_DIR}/
   bash preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR}
   ```
 
-  This script will process the fastq files by fastp. Then mapping reads to genome using STAR.
+  This script processes the FASTQ files using fastp and then maps the reads to the genome using STAR.
   
-  We will use an ID call `current` by defalut, to specify, run:
+  We will use an ID called `current` by defalut, to specify, run:
   
   ```sh
   bash preprocess.sh ${ANALYSIS_DIR} ${GENOME_DIR} ${ID}
@@ -120,11 +120,11 @@ ${GENOME_DIR}/
   bash clipper.sh ${ANALYSIS_DIR} 
   ```
   
-  This script will use the mapping result (STAR) to call peaks by clipper.
+  This script utilizes the mapping results from STAR to call peaks using clipper.
   
   **⚠️NOTE: This is not the final peak results.**
   
-  We will use an ID call `current` by defalut, to specify, run:
+  We will use an ID called `current` by defalut, to specify, run:
   
   ```sh
   bash clipper.sh ${ANALYSIS_DIR} ${ID}
@@ -145,10 +145,10 @@ ${GENOME_DIR}/
   bash GRIP_peak.sh ${ANALYSIS_DIR} 
   ```
   
-  This script will use the mapping result (STAR) to call peaks by clipper.
+  This script utilizes the clipper results to call N<sup>6</sup>-methyladenosine sites.
   
   
-  We will use an ID call `current` by defalut, to specify, run:
+  We will use an ID called `current` by defalut, to specify, run:
   
   ```sh
   bash GRIP_peak.sh ${ANALYSIS_DIR} ${ID}
