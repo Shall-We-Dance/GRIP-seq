@@ -1,5 +1,5 @@
 # GRIP-seq
-## call peaks for GRIP-seq
+## GRIP-seq Peaks Calling
 
 + **Call peaks using [Clipper](https://github.com/YeoLab/clipper).**
 
@@ -13,7 +13,7 @@ clipper -b ${ROOTDIR}/STAR/${INID}/${NAME}/${NAME}.bamAligned.sortedByCoord.out.
 --FDR 0.01 --poisson-cutoff 1e-50 --minreads 5 --binomial 0.01
 ```
 
-+ **Separate summits form clipper results.**
++ **Separate summits from clipper results.**
 
 ```
 zcat ${ROOTDIR}/clipper/${ID}/${NAME}.peak.bed.gz |  awk -F"\t" '{if ($6=="+") print $1"\t"$2+2"\t"$2+3"\t"$6; else print $1"\t"$3-3"\t"$3-2"\t"$6}' > ${ROOTDIR}/clipper/${ID}/${NAME}.summit.bed
