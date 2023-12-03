@@ -8,24 +8,24 @@
   #basic usage
   bash scripts/generate_genome_index.sh ${GENOME_DIR}
   ```
-  This will generate a hg19 genome index using defalut settings, which uses `--sjdbOverhang=100` and runs on 8 threads.
+  This script generates an hg19 genome index with default settings, using `--sjdbOverhang=100` and running on 8 threads.
   
-  To specify the threads used to generate, run:
+  To specify the threads for generatation, run:
   
   ```
   #specify CPU threads
-  bash scripts/generate_genome_index.sh ${GENOME_DIR} ${CPU_THREADS}
+  bash scripts/generate_genome_index.sh ${GENOME_DIR} ${THREADS}
   ```
   
   The ideal value of `--sjdbOverhang` is `max(ReadLength)-1`, to specify, run:
   
   ```
   #specify CPU threads & index length
-  bash scripts/generate_genome_index.sh ${GENOME_DIR} ${CPU_THREADS} ${INDEX_LENGTH}
+  bash scripts/generate_genome_index.sh ${GENOME_DIR} ${THREADS} ${INDEX_LENGTH}
   ```
   
 
-### 3.  Make directory for GRIP-seq pipeline.
+### 3.  Create directory for GRIP-seq pipeline.
   
 ```
 mkdir -p ${ANALYSIS_DIR}/fastp/${ID}
