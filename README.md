@@ -6,7 +6,7 @@ Welcome to our research article published in [***Nature Chemistry***](https://do
 
 To facilitate the analysis of GRIP-seq data, we have outlined a comprehensive pipeline below. By following these steps, researchers can gain valuable insights from their GRIP-seq experiments.
 
-Additionally, for those interested in exploring further, our raw sequencing data is accessible on NCBI's Sequence Read Archive (SRA): [PRJNA797913](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA797913). Delve into the raw data to deepen your understanding and explore the intricacies of our research.
+Additionally, for those interested in exploring further, our raw sequencing data is accessible on NCBI's Sequence Read Archive (SRA): [PRJNA797913](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA797913).
 
 ## Install
 
