@@ -159,4 +159,4 @@ bamCoverage -b ${ROOTDIR}/STAR/${ID}/${NAME}/${NAME}.bamAligned.sortedByCoord.ou
   sort -k1,1 -k2,2n ${ROOTDIR}/${NAME}.summit.bed > ${ROOTDIR}/${NAME}.summit.sorted.bed
   ```
   
-  📒NOTE: We do not recommend using [MACS](https://github.com/macs3-project/MACS) to call peaks, our result is quite different form the model used by MACS, I've tried that tools but the result is week.
+  📒NOTE: We do not recommend you to use [MACS](https://github.com/macs3-project/MACS) for peak calling, as our results significantly differ from MACS's model. I attempted to use MACS, but it yielded weak peaks.
