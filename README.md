@@ -1,5 +1,8 @@
 # GRIP-seq
 
+**For the latest analysis pipeline, please refer to [GRIP-seq_smk](https://github.com/Shall-We-Dance/GRIP-seq_smk).**
+
+
 ![pic](./GRIP-seq.png)
 
 Welcome to our research article published in [***Nature Chemistry***](https://doi.org/10.1038/s41557-022-01038-4), where we introduced an innovative technique called **GRIP-seq** (**G**ECX-**R**NA with **i**mmuno**p**recipitation). This method paves the way for in vivo identification of unknown **N<sup>6</sup>-methyladenosine on RNA** with **single-nucleotide resolution** throughout the transcriptome using **unnatural amino acids** (UAAs).
